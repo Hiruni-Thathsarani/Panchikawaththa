@@ -21,57 +21,58 @@ class _AdminPageState extends State<AdminPage> {
               icon: Icon(Icons.arrow_back),
             ),
             const Text('My profile'),
+        
           ],
         ),
+        
       ),
-      body: Row(
-        mainAxisAlignment:
-            MainAxisAlignment.spaceEvenly, // Changed to spaceEvenly
+      
+      body: Column(
+        
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ElevatedButton(
-            onPressed: () {
-              // Handle view analytics action here
-            },
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: Color(0xFFFF5C01),
+          // Container for profile picture icon
+          Container(
+            width: 150, // Adjust size as needed
+            height: 150, // Adjust size as needed
+            decoration: BoxDecoration(
+              color: Color(0xFFEBEBEB), // Square-shaped layer color
+              shape: BoxShape.circle,
             ),
-            child: const Text('View Analytics'),
+            child: IconButton(
+              onPressed: () {
+                // Handle profile picture upload action here
+              },
+              iconSize: 80, // Adjust size as needed
+              icon: Icon(Icons.person),
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              // Handle manage account action here
-            },
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: Color(0xFFFF5C01),
-            ),
-            child: const Text('Manage Account'),
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle sellers action here
-                  },
-                  child: const Text('Sellers'),
+          SizedBox(height: 30), // Add spacing between widgets
+          // Upload icon above two buttons
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Handle view analytics action here
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Color(0xFFFF5C01),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle ads action here
-                  },
-                  child: const Text('Ads'),
+                child: const Text('View Analytics'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  // Handle manage account action here
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Color(0xFFFF5C01),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle buyers action here
-                  },
-                  child: const Text('Buyers'),
-                ),
-              ],
-            ),
+                child: const Text('Manage Account'),
+              ),
+            ],
           ),
         ],
       ),
