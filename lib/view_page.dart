@@ -12,7 +12,7 @@ class ViewPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(
                     context); // Navigate back when back button is pressed
-              },
+              },  //comit 2
               icon: Icon(Icons.arrow_back),
             ),
             Icon(Icons.monitor, color: Color(0xFFFF5C01)),
