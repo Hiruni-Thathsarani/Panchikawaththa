@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/view_page.dart';
+import 'package:my_app/screens/manage_accounts.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({Key? key}) : super(key: key);
@@ -21,20 +23,16 @@ class _AdminPageState extends State<AdminPage> {
               icon: Icon(Icons.arrow_back),
             ),
             const Text('My profile'),
-        
-          ],
-        ),
-        
-      ),
-      
+          ],),),
       body: Column(
-        
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SizedBox(height: 1),
+
           // Container for profile picture icon
           Container(
-            width: 150, // Adjust size as needed
-            height: 150, // Adjust size as needed
+            width: 120,
+            height: 120,
             decoration: BoxDecoration(
               color: Color(0xFFEBEBEB), // Square-shaped layer color
               shape: BoxShape.circle,
@@ -43,66 +41,134 @@ class _AdminPageState extends State<AdminPage> {
               onPressed: () {
                 // Handle profile picture upload action here
               },
-              iconSize: 80, // Adjust size as needed
+              iconSize: 80,
               icon: Icon(Icons.person),
             ),
           ),
-          SizedBox(height: 30), // Add spacing between widgets
+          SizedBox(height: 5),
           // Upload icon above two buttons
+          Text(
+            'Thathsarani_Mdh', // Replace with actual user's name
+            style: TextStyle(fontSize: 13), // Set text size
+          ),
+          Text(
+            'hirunithathsarani2001@gmail.com',
+            style: TextStyle(fontSize: 11),
+          ),
+          SizedBox(height: 20),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              //view anal
               ElevatedButton(
                 onPressed: () {
-                  // Handle view analytics action here
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                    return ViewPage();
+                  }));
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Color(0xFFFF5C01),
+                  minimumSize: Size(150, 50), // Adjust button size here
                 ),
                 child: const Text('View Analytics'),
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Handle manage account action here
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                    return ManageAccount();
+                  }));
                 },
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Color(0xFFFF5C01),
+                  minimumSize: Size(150, 50), // Adjust button size here
                 ),
-                child: const Text('Manage Account'),
+                child: const Text('Manage Accounts'),
               ),
             ],
           ),
+          SizedBox(height: 60),
+          // Three square boxes with text labels
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              
+              _buildSquareButton(' Sellers', Icons.person),
+              _buildSquareButton(' Buyers', Icons.shopping_cart),
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildSquareButton(' Ads', Icons.library_books),
+              _buildSquareButton('Orders', Icons.trolley),
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildSquareButton('Products', Icons.car_rental),
+              _buildSquareButton('Categories', Icons.category),
+            ],
+          ),
+
+          
         ],
       ),
       bottomNavigationBar: Container(
-        color: Color(0xFFE3E3E3),
-        padding: EdgeInsets.all(8),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             IconButton(
-              onPressed: () {
-                // Handle search action here
-              },
-              icon: Icon(Icons.search, color: Color(0xFFFF5C01)),
+              onPressed: () {},
+              icon: Icon(Icons.dashboard, color: Color(0xFFFF5C01)),
             ),
             IconButton(
               onPressed: () {
-                // Handle profile action here
+                setState(() {
+                  var iconColor = Colors.green; // Change the color to red
+                });
+                // Handle delete action here
               },
-              icon: Icon(Icons.person, color: Color(0xFFFF5C01)),
+              icon: Icon(Icons.delete, color: Color(0xFFFF5C01)),
             ),
             IconButton(
               onPressed: () {
-                // Handle notification action here
+                // Handle add action here
               },
-              icon: Icon(Icons.notifications, color: Color(0xFFFF5C01)),
+              icon: Icon(Icons.add, color: Color(0xFFFF5C01)),
+            ),
+            IconButton(
+              onPressed: () {
+                // Handle  action here
+              },
+              icon: Icon(Icons.settings, color: Color(0xFFFF5C01)),
             ),
           ],
         ),
       ),
     );
   }
-}
+Widget _buildSquareButton(String labelText, IconData icon) {
+    return Container(
+      width: 130, // Adjust button width here
+      height: 100, // Adjust button height here
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Color(0xFFEBEBEB),
+      ),
+      padding: EdgeInsets.all(10),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon),
+          SizedBox(width: 5),
+          Text(labelText),
+        ],
+      ),
+    );
+  }}

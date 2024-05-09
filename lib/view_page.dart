@@ -12,7 +12,7 @@ class ViewPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(
                     context); // Navigate back when back button is pressed
-              },  //comit 2
+              },
               icon: Icon(Icons.arrow_back),
             ),
             Icon(Icons.monitor, color: Color(0xFFFF5C01)),
@@ -22,7 +22,6 @@ class ViewPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                
               ),
             ),
           ],
@@ -40,10 +39,42 @@ class ViewPage extends StatelessWidget {
                 _buildListItem('Ads'),
                 _buildListItem('Reviews'),
                 _buildListItem('Sales'),
+                _buildListItem('models'),
               ],
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              onPressed: () {
+                // Handle dashbord action here
+              },
+              icon: Icon(Icons.dashboard, color: Color(0xFFFF5C01)),
+            ),
+            IconButton(
+              onPressed: () {
+                // Handle delete action here
+              },
+              icon: Icon(Icons.delete, color: Color(0xFFFF5C01)),
+            ),
+            IconButton(
+              onPressed: () {
+                // Handle add action here
+              },
+              icon: Icon(Icons.add, color: Color(0xFFFF5C01)),
+            ),
+            IconButton(
+              onPressed: () {
+                // Handle  action here
+              },
+              icon: Icon(Icons.settings, color: Color(0xFFFF5C01)),
+            ),
+          ],
+        ),
       ),
     );
   }
