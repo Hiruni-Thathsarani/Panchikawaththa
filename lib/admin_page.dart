@@ -132,7 +132,7 @@ class _AdminPageState extends State<AdminPage> {
                   _buildSquareButton('Products', Icons.car_rental),
                   _buildSquareButton('Categories', Icons.category),
                 ],
-              ),
+              ),  
               const SizedBox(height: 50),
               // Action bar with tabs
               Container(
@@ -152,7 +152,7 @@ class _AdminPageState extends State<AdminPage> {
                 color: Colors.grey[200],
                 child: TabBar(
                     tabs: [
-                      Tab(text: 'Overviews'),
+                      Tab(text: 'Overview'),
                       Tab(text: 'Revenues'),
                       Tab(text: 'Ads'),
                       Tab(text: 'Monthly Visits'),
