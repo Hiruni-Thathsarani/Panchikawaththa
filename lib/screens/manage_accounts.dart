@@ -98,7 +98,8 @@ class _ManageAccountState extends State<ManageAccount> {
     );
   }
 }
-
+ 
+ 
 class UserDetailsPage extends StatefulWidget {
   final User user;
 
@@ -110,7 +111,7 @@ class UserDetailsPage extends StatefulWidget {
 
 class _UserDetailsPageState extends State<UserDetailsPage> {
   late TextEditingController nameController;
-  late TextEditingController emailController;
+  late TextEditingController emailController ;
 
   @override
   void initState() {
