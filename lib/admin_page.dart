@@ -1,7 +1,15 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
+import 'package:my_app/screens/Category.dart';
+import 'package:my_app/screens/orders.dart';
+import 'package:my_app/screens/product.dart';
+import 'package:my_app/screens/sellers.dart';
 import 'package:my_app/view_page.dart';
 import 'package:my_app/screens/manage_accounts.dart';
+import 'package:my_app/screens/ads.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:my_app/screens/adpost1.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({Key? key}) : super(key: key);
@@ -113,26 +121,80 @@ class _AdminPageState extends State<AdminPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildSquareButton(' Sellers', Icons.person),
-                  _buildSquareButton(' Buyers', Icons.shopping_cart),
+                  _buildSquareButton(
+                    labelText: ' Sellers',
+                    icon: Icons.person,
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (_) {
+                        return AppBarApp();
+                      }));
+                    },
+                  ),
+                  _buildSquareButton(
+                    labelText: ' Buyers',
+                    icon: Icons.shopping_cart,
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (_) {
+                        return AppBarApp();
+                      }));
+                    },
+                  ),
                 ],
               ),
               SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildSquareButton(' Ads', Icons.library_books),
-                  _buildSquareButton('Orders', Icons.trolley),
+                  _buildSquareButton(
+                    labelText: ' Ads',
+                    icon: Icons.library_books,
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (_) {
+                        return Ads();
+                      }));
+                    },
+                  ),
+                  _buildSquareButton(
+                    labelText: ' Orders',
+                    icon: Icons.trolley,
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (_) {
+                        return Orders();
+                      }));
+                    },
+                  ),
                 ],
               ),
               SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildSquareButton('Products', Icons.car_rental),
-                  _buildSquareButton('Categories', Icons.category),
+                  _buildSquareButton(
+                    labelText: ' Products',
+                    icon: Icons.car_rental,
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (_) {
+                        return Product();
+                      }));
+                    },
+                  ),
+                  _buildSquareButton(
+                    labelText: ' Categories',
+                    icon: Icons.category,
+                    onPressed: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (_) {
+                        return Category();
+                      }));
+                    },
+                  ),
                 ],
-              ),  
+              ),
               const SizedBox(height: 50),
               // Action bar with tabs
               Container(
@@ -150,7 +212,7 @@ class _AdminPageState extends State<AdminPage> {
               const SizedBox(height: 20),
               Container(
                 color: Colors.grey[200],
-                child: TabBar(
+                child: const TabBar(
                     tabs: [
                       Tab(text: 'Overview'),
                       Tab(text: 'Revenues'),
@@ -197,7 +259,9 @@ class _AdminPageState extends State<AdminPage> {
               ),
               IconButton(
                 onPressed: () {
-                  // Handle add action here
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                    return AdPost1();
+                  }));
                 },
                 icon: Icon(Icons.add, color: Color(0xFFFF5C01)),
               ),
@@ -263,22 +327,29 @@ class _AdminPageState extends State<AdminPage> {
     );
   }
 
-  Widget _buildSquareButton(String labelText, IconData icon) {
-    return Container(
-      width: 130, // Adjust button width here
-      height: 100, // Adjust button height here
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Color(0xFFEBEBEB),
-      ),
-      padding: EdgeInsets.all(10),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon),
-          SizedBox(width: 5),
-          Text(labelText),
-        ],
+  Widget _buildSquareButton({
+    required String labelText,
+    required IconData icon,
+    required VoidCallback onPressed,
+  }) {
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        width: 130, // Adjust button width here
+        height: 100, // Adjust button height here
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Color(0xFFEBEBEB),
+        ),
+        padding: EdgeInsets.all(10),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon),
+            SizedBox(width: 5),
+            Text(labelText),
+          ],
+        ),
       ),
     );
   }

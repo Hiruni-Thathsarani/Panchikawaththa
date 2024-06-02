@@ -1,54 +1,94 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/admin_page.dart';
 
-class Ads extends StatefulWidget {
-  const Ads({Key? key}) : super(key: key);
+final List<int> _items = List<int>.generate(100, (int index) => index);
 
-  @override
-  State<Ads> createState() => _AdminPageState();
-}
+class Ads extends StatelessWidget {
+  const Ads({super.key});
 
-class _AdminPageState extends State<Ads> {
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        colorSchemeSeed: Color.fromARGB(255, 223, 186, 90),
+        useMaterial3: true,
+      ),
+      home: const AppBarExample(),
+    );
+  }
+}
+
+class AppBarExample extends StatefulWidget {
+  const AppBarExample({super.key});
+
+  @override
+  State<AppBarExample> createState() => _AppBarExampleState();
+}
+
+class _AppBarExampleState extends State<AppBarExample> {
+  bool shadowColor = false;
+  double? scrolledUnderElevation;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
+    final Color evenItemColor = colorScheme.primary.withOpacity(0.5);
+
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            const Text('Ads'),
-          ],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                        return AdminPage();
+                      }));
+                    },
         ),
+        title: const Text('Ads'),
+        scrolledUnderElevation: scrolledUnderElevation,
+        shadowColor: shadowColor ? Theme.of(context).colorScheme.shadow : null,
       ),
-      bottomNavigationBar: Container(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IconButton(
-              onPressed: () {
-                // Handle dashbord action here
-              },
-              icon: Icon(Icons.dashboard, color: Color(0xFFFF5C01)),
+      body: GridView.builder(
+        itemCount: _items.length,
+        padding: const EdgeInsets.all(8.0),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 1,
+          childAspectRatio: 2.0,
+          mainAxisSpacing: 10.0,
+          crossAxisSpacing: 10.0,
+        ),
+        itemBuilder: (BuildContext context, int index) {
+          if (index == 0) {
+            return Center();
+          }
+          return Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              color: _items[index].isOdd ? oddItemColor : evenItemColor,
             ),
-            IconButton(
-              onPressed: () {
-                // Handle delete action here
-              },
-              icon: Icon(Icons.delete, color: Color(0xFFFF5C01)),
-            ),
-            IconButton(
-              onPressed: () {
-                // Handle add action here
-              },
-              icon: Icon(Icons.add, color: Color(0xFFFF5C01)),
-            ),
-            IconButton(
-              onPressed: () {
-                // Handle  action here
-              },
-              icon: Icon(Icons.settings, color: Color(0xFFFF5C01)),
-            ),
-          ],
+            child: Text('Item $index'),
+          );
+        },
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: OverflowBar(
+            overflowAlignment: OverflowBarAlignment.center,
+            alignment: MainAxisAlignment.center,
+            overflowSpacing: 5.0,
+            children: const <Widget>[
+              SizedBox(width: 5),
+            ],
+          ),
         ),
       ),
     );
   }
+}
+
+void main() {
+  runApp(const Ads());
 }

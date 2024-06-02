@@ -1,10 +1,14 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:my_app/admin_page.dart';
-/*import 'package:my_app/login_page.dart';
-import 'package:my_app/screens/sign_in1.dart';
+import 'package:my_app/login_page.dart';
 import 'package:my_app/screens/manage_accounts.dart';
+import 'package:my_app/screens/post_success.dart';
+import 'package:my_app/screens/profile_page.dart';
 import 'package:my_app/screens/sellers.dart';
-import 'package:my_app/screens/ads.dart';*/
+import 'package:my_app/screens/ads.dart';
+import 'package:my_app/screens/adpost1.dart';
 
 void main() {
   runApp(const MyApp());

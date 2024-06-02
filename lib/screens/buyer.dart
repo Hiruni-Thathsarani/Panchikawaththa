@@ -3,8 +3,8 @@ import 'package:my_app/admin_page.dart';
 
 final List<int> _items = List<int>.generate(100, (int index) => index);
 
-class AppBarApp extends StatelessWidget {
-  const AppBarApp({super.key});
+class Buyers extends StatelessWidget {
+  const Buyers({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class _AppBarExampleState extends State<AppBarExample> {
                       }));
                     },
         ),
-        title: const Text('Sellers'),
+        title: const Text('Buyers'),
         scrolledUnderElevation: scrolledUnderElevation,
         shadowColor: shadowColor ? Theme.of(context).colorScheme.shadow : null,
       ),
@@ -90,5 +90,5 @@ class _AppBarExampleState extends State<AppBarExample> {
 }
 
 void main() {
-  runApp(const AppBarApp());
+  runApp(const Buyers());
 }
