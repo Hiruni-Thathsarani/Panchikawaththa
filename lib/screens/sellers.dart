@@ -1,7 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/admin_page.dart';
 
-final List<int> _items = List<int>.generate(100, (int index) => index);
+class Seller {
+  final String username;
+  final String contactDetails;
+  final String profilePictureUrl;
+  final String summary;
+
+  Seller({
+    required this.username,
+    required this.contactDetails,
+    required this.profilePictureUrl,
+    required this.summary,
+  });
+}
+
+final List<Seller> _sellers = List<Seller>.generate(100, (int index) {
+  return Seller(
+    username: 'User $index',
+    contactDetails: 'user$index@example.com\n+1234567890',
+    profilePictureUrl:
+        'https://via.placeholder.com/150', // Placeholder image URL
+    summary: 'This is a summary for User $index.',
+  );
+});
 
 class AppBarApp extends StatelessWidget {
   const AppBarApp({super.key});
@@ -40,17 +62,18 @@ class _AppBarExampleState extends State<AppBarExample> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                        return AdminPage();
-                      }));
-                    },
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+              return AdminPage();
+            }));
+          },
         ),
         title: const Text('Sellers'),
         scrolledUnderElevation: scrolledUnderElevation,
-        shadowColor: shadowColor ? Theme.of(context).colorScheme.shadow : null,
+        shadowColor:
+            shadowColor ? Theme.of(context).colorScheme.shadow : oddItemColor,
       ),
       body: GridView.builder(
-        itemCount: _items.length,
+        itemCount: _sellers.length,
         padding: const EdgeInsets.all(8.0),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 1,
@@ -59,16 +82,40 @@ class _AppBarExampleState extends State<AppBarExample> {
           crossAxisSpacing: 10.0,
         ),
         itemBuilder: (BuildContext context, int index) {
-          if (index == 0) {
-            return Center();
-          }
+          final seller = _sellers[index];
           return Container(
+            padding: EdgeInsets.all(10),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
-              color: _items[index].isOdd ? oddItemColor : evenItemColor,
+              color: index.isOdd ? oddItemColor : evenItemColor,
             ),
-            child: Text('Item $index'),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: NetworkImage(seller.profilePictureUrl),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        seller.username,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(seller.contactDetails),
+                      Text(seller.summary),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),

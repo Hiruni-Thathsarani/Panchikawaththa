@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:my_app/components/add_image.dart';
 import 'package:my_app/components/checkbox.dart';
 import 'package:my_app/admin_page.dart';
+import 'package:my_app/screens/adPost2.dart';
+import 'package:my_app/screens/adpost1.dart';
 
 class AdPost1 extends StatefulWidget {
   const AdPost1({super.key});
@@ -281,18 +283,18 @@ class CustomButton extends StatelessWidget {
   }
 }
 
-class AdPost2 extends StatelessWidget {
-  const AdPost2({super.key});
+// class AdPost2 extends StatelessWidget {
+//   const AdPost2({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Ad Post 2'),
-      ),
-      body: Center(
-        child: const Text('Content for Ad Post 2'),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Ad Post 2'),
+//       ),
+//       body: Center(
+//         child: const Text('Content for Ad Post 2'),
+//       ),
+//     );
+//   }
+// }

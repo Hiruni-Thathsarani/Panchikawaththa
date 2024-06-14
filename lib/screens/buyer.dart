@@ -67,6 +67,7 @@ class _AppBarExampleState extends State<AppBarExample> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
               color: _items[index].isOdd ? oddItemColor : evenItemColor,
+              
             ),
             child: Text('Item $index'),
           );

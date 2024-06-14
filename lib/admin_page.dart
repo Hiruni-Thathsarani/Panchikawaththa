@@ -1,5 +1,3 @@
-// ignore_for_file: unused_import
-
 import 'package:flutter/material.dart';
 import 'package:my_app/screens/Category.dart';
 import 'package:my_app/screens/orders.dart';
@@ -8,8 +6,9 @@ import 'package:my_app/screens/sellers.dart';
 import 'package:my_app/view_page.dart';
 import 'package:my_app/screens/manage_accounts.dart';
 import 'package:my_app/screens/ads.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:my_app/screens/adpost1.dart';
+import 'package:my_app/screens/piechart.dart';
+import 'package:my_app/screens/barchart.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({Key? key}) : super(key: key);
@@ -19,21 +18,6 @@ class AdminPage extends StatefulWidget {
 }
 
 class _AdminPageState extends State<AdminPage> {
-  late List<_ChartData> data;
-  late TooltipBehavior _tooltip;
-
-  @override
-  void initState() {
-    data = [
-      _ChartData('Sellers', 12),
-      _ChartData('Ads', 15),
-      _ChartData('Revenue', 30),
-      _ChartData('Buyers', 6.4),
-    ];
-    _tooltip = TooltipBehavior(enable: true);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -210,9 +194,11 @@ class _AdminPageState extends State<AdminPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              Container(
-                color: Colors.grey[200],
-                child: const TabBar(
+              PreferredSize(
+                preferredSize: Size.fromHeight(.0), // Adjust height as needed
+                child: Container(
+                  color: Colors.grey[200],
+                  child: const TabBar(
                     tabs: [
                       Tab(text: 'Overview'),
                       Tab(text: 'Revenues'),
@@ -221,16 +207,17 @@ class _AdminPageState extends State<AdminPage> {
                     ],
                     labelColor: Colors.black,
                     indicatorColor: Colors.orange,
-                    indicatorWeight: BorderSide.strokeAlignOutside),
+                  ),
+                ),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 20),
               Container(
-                height: 200, // Adjust height as needed
+                height: 350, // Adjust height as needed
                 child: TabBarView(
                   children: [
-                    _buildOverviewContent(),
+                    BarChartWidget(), // Bar chart widget
                     _buildRevenueContent(),
-                    _buildAdsContent(),
+                    PieChartWidget(), // Pie chart widget
                     _buildMonthlyVisitsContent(),
                   ],
                 ),
@@ -278,45 +265,10 @@ class _AdminPageState extends State<AdminPage> {
     );
   }
 
-  Widget _buildOverviewContent() {
-    // Build content for Overview tab
-    return Center(
-      child: Container(
-        height: 200,
-        width: 250, // Adjust chart height as needed
-        child: SfCartesianChart(
-          primaryXAxis: CategoryAxis(),
-          primaryYAxis: NumericAxis(
-            minimum: 0,
-            maximum: 40,
-            interval: 10,
-          ),
-          tooltipBehavior: _tooltip,
-          series: <CartesianSeries<_ChartData, String>>[
-            ColumnSeries<_ChartData, String>(
-              dataSource: data,
-              xValueMapper: (_ChartData data, _) => data.x,
-              yValueMapper: (_ChartData data, _) => data.y,
-              name: 'Total',
-              color: Color.fromRGBO(95, 97, 99, 1),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _buildRevenueContent() {
     // Build content for Revenue tab
     return Center(
       child: Text('Revenue Content Here'),
-    );
-  }
-
-  Widget _buildAdsContent() {
-    // Build content for Ads tab
-    return Center(
-      child: Text('Ads Content Here'),
     );
   }
 
@@ -353,11 +305,4 @@ class _AdminPageState extends State<AdminPage> {
       ),
     );
   }
-}
-
-class _ChartData {
-  _ChartData(this.x, this.y);
-
-  final String x;
-  final double y;
 }

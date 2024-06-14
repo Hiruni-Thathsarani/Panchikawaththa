@@ -1,8 +1,6 @@
-
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:my_app/admin_page.dart';
 import 'package:my_app/main.dart';
-
 
 class login extends StatefulWidget {
   @override
@@ -52,7 +50,7 @@ class _loginState extends State<login> {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
                 child: Image.asset(
-                  'lib/src/img/orange logo 1.png',
+                  'asset/img/orange_logo1.png',
                   height: 150,
                   width: 200,
                 ),
@@ -80,7 +78,7 @@ class _loginState extends State<login> {
                   ),
                 ),
               ),
-               TextFieldContainer(
+              TextFieldContainer(
                 child: TextField(
                   controller: emailController,
                   obscureText: true,
@@ -96,10 +94,8 @@ class _loginState extends State<login> {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 20),
-                   
                   ),
                   GestureDetector(
-                    
                     child: Icon(
                       Icons.arrow_forward,
                       color: Colors.black,
@@ -114,19 +110,14 @@ class _loginState extends State<login> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(29),
                 ),
-                
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: 30),
-                    
                   ),
-                  GestureDetector(
-                    
-                    
-                  ),
+                  GestureDetector(),
                 ],
               )
             ],
@@ -141,7 +132,8 @@ class _loginState extends State<login> {
 
     if (res['success']) {
       // Navigate to home page if login is successful
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) =>AdminPage()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => AdminPage()));
     } else {
       // Show error message if login fails
       showDialog(
@@ -163,7 +155,7 @@ class _loginState extends State<login> {
       );
     }
   }
-  
+
   userLogin(String trim, String trim2) {}
 }
 
