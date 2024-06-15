@@ -9,9 +9,11 @@ import 'package:my_app/screens/ads.dart';
 import 'package:my_app/screens/adpost1.dart';
 import 'package:my_app/screens/piechart.dart';
 import 'package:my_app/screens/barchart.dart';
+//import 'package:my_app/screens/digitDisplay.dart';
+import 'package:my_app/screens/monthly_visits.dart';
 
 class AdminPage extends StatefulWidget {
-  const AdminPage({Key? key}) : super(key: key);
+  const AdminPage({super.key});
 
   @override
   State<AdminPage> createState() => _AdminPageState();
@@ -30,7 +32,7 @@ class _AdminPageState extends State<AdminPage> {
                 onPressed: () {
                   // Handle back button action here
                 },
-                icon: Icon(Icons.arrow_back),
+                icon: const Icon(Icons.arrow_back),
               ),
               const Text('My profile'),
             ],
@@ -40,11 +42,11 @@ class _AdminPageState extends State<AdminPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 1), // Container for profile picture icon
+              const SizedBox(height: 1), // Container for profile picture icon
               Container(
                 width: 120,
                 height: 120,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Color(0xFFEBEBEB), // Square-shaped layer color
                   shape: BoxShape.circle,
                 ),
@@ -53,20 +55,20 @@ class _AdminPageState extends State<AdminPage> {
                     // Handle profile picture upload action here
                   },
                   iconSize: 80,
-                  icon: Icon(Icons.person),
+                  icon: const Icon(Icons.person),
                 ),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               // Upload icon above two buttons
-              Text(
+              const Text(
                 'Thathsarani_Mdh', // Replace with actual user's name
                 style: TextStyle(fontSize: 13), // Set text size
               ),
-              Text(
+              const Text(
                 'hirunithathsarani2001@gmail.com',
                 style: TextStyle(fontSize: 11),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -79,8 +81,9 @@ class _AdminPageState extends State<AdminPage> {
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor: Color(0xFFFF5C01),
-                      minimumSize: Size(150, 50), // Adjust button size here
+                      backgroundColor: const Color(0xFFFF5C01),
+                      minimumSize:
+                          const Size(150, 50), // Adjust button size here
                     ),
                     child: const Text('View Analytics'),
                   ),
@@ -88,19 +91,20 @@ class _AdminPageState extends State<AdminPage> {
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) {
-                        return ManageAccount();
+                        return const ManageAccount();
                       }));
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
-                      backgroundColor: Color(0xFFFF5C01),
-                      minimumSize: Size(150, 50), // Adjust button size here
+                      backgroundColor: const Color(0xFFFF5C01),
+                      minimumSize:
+                          const Size(150, 50), // Adjust button size here
                     ),
                     child: const Text('Manage Accounts'),
                   ),
                 ],
               ),
-              SizedBox(height: 45),
+              const SizedBox(height: 45),
               // Three square boxes with text labels
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -111,7 +115,7 @@ class _AdminPageState extends State<AdminPage> {
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) {
-                        return AppBarApp();
+                        return const AppBarApp();
                       }));
                     },
                   ),
@@ -121,13 +125,13 @@ class _AdminPageState extends State<AdminPage> {
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) {
-                        return AppBarApp();
+                        return const AppBarApp();
                       }));
                     },
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -137,7 +141,7 @@ class _AdminPageState extends State<AdminPage> {
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) {
-                        return Ads();
+                        return const Ads();
                       }));
                     },
                   ),
@@ -147,13 +151,13 @@ class _AdminPageState extends State<AdminPage> {
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) {
-                        return Orders();
+                        return const Orders();
                       }));
                     },
                   ),
                 ],
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -163,7 +167,7 @@ class _AdminPageState extends State<AdminPage> {
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) {
-                        return Product();
+                        return const Product();
                       }));
                     },
                   ),
@@ -173,7 +177,7 @@ class _AdminPageState extends State<AdminPage> {
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) {
-                        return Category();
+                        return const Category();
                       }));
                     },
                   ),
@@ -195,87 +199,85 @@ class _AdminPageState extends State<AdminPage> {
               ),
               const SizedBox(height: 20),
               PreferredSize(
-                preferredSize: Size.fromHeight(.0), // Adjust height as needed
+                preferredSize:
+                    const Size.fromHeight(50), // Adjust height as needed
                 child: Container(
                   color: Colors.grey[200],
                   child: const TabBar(
                     tabs: [
                       Tab(text: 'Overview'),
-                      Tab(text: 'Revenues'),
-                      Tab(text: 'Ads'),
+                      Tab(text: 'Popular Ads'),
                       Tab(text: 'Monthly Visits'),
                     ],
                     labelColor: Colors.black,
-                    indicatorColor: Colors.orange,
+                    indicatorColor: Color(0xFFFF5C01),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
-              Container(
+              const SizedBox(height: 20),
+              SizedBox(
                 height: 350, // Adjust height as needed
                 child: TabBarView(
                   children: [
                     BarChartWidget(), // Bar chart widget
-                    _buildRevenueContent(),
                     PieChartWidget(), // Pie chart widget
                     _buildMonthlyVisitsContent(),
                   ],
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               // Bar Chart
             ],
           ),
         ),
-        bottomNavigationBar: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.dashboard, color: Color(0xFFFF5C01)),
-              ),
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    var iconColor = Colors.green; // Change the color to red
-                  });
-                  // Handle delete action here
-                },
-                icon: Icon(Icons.delete, color: Color(0xFFFF5C01)),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return AdPost1();
-                  }));
-                },
-                icon: Icon(Icons.add, color: Color(0xFFFF5C01)),
-              ),
-              IconButton(
-                onPressed: () {
-                  // Handle action here
-                },
-                icon: Icon(Icons.settings, color: Color(0xFFFF5C01)),
-              ),
-            ],
-          ),
+        bottomNavigationBar: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.dashboard, color: Color(0xFFFF5C01)),
+            ),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  // var iconColor = Colors.green; // Change the color to red
+                });
+                // Handle delete action here
+              },
+              icon: const Icon(Icons.delete, color: Color(0xFFFF5C01)),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                  return const AdPost1();
+                }));
+              },
+              icon: const Icon(Icons.add, color: Color(0xFFFF5C01)),
+            ),
+            IconButton(
+              onPressed: () {
+                // Handle action here
+              },
+              icon: const Icon(Icons.settings, color: Color(0xFFFF5C01)),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildRevenueContent() {
-    // Build content for Revenue tab
-    return Center(
-      child: Text('Revenue Content Here'),
-    );
-  }
-
   Widget _buildMonthlyVisitsContent() {
-    // Build content for Monthly Visits tab
+    // Example counts, replace with your actual data or defaults
+    int openedCount = 75;
+    int engagedCount = 60;
+    int eoiSentCount = 45;
+
     return Center(
-      child: Text('Monthly Visits Content Here'),
+      child: MonthlyVisitsWidget(
+        openedCount: openedCount,
+        engagedCount: engagedCount,
+        eoiSentCount: eoiSentCount,
+      ),
     );
   }
 
@@ -291,14 +293,14 @@ class _AdminPageState extends State<AdminPage> {
         height: 100, // Adjust button height here
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Color(0xFFEBEBEB),
+          color: const Color(0xFFEBEBEB),
         ),
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(icon),
-            SizedBox(width: 5),
+            const SizedBox(width: 5),
             Text(labelText),
           ],
         ),
