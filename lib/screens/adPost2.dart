@@ -1,14 +1,10 @@
-// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors, file_names
-
 import 'package:flutter/material.dart';
-//import 'package:my_app/components/custom_button.dart';
 import 'package:my_app/dropdowns/condition.dart';
 import 'package:my_app/dropdowns/fuel.dart';
 import 'package:my_app/dropdowns/origin.dart';
 import 'package:my_app/dropdowns/vehicle_make.dart';
 import 'package:my_app/dropdowns/vehicle_model.dart';
-import 'package:my_app/screens/adPost1.dart';
-import 'package:my_app/screens/post_success.dart';
+import 'package:my_app/screens/AdPost1.dart';
 
 class AdPost2 extends StatefulWidget {
   const AdPost2({super.key});
@@ -57,12 +53,11 @@ List<String> fuel = [
 ];
 
 class _AdPost2State extends State<AdPost2> {
-  String? _selectedMake; // Variable to store the selected vehicle make
-  String? _selectedModel; // Variable to store the selected vehicle model
-  String? _selectedOrigin; // Variable to store the selected vehicle origin
-  String?
-      _selectedCondition; // Variable to store the selected vehicle condition
-  String? _selectedFuel; // Variable to store the selected vehicle fuel
+  String? _selectedMake;
+  String? _selectedModel;
+  String? _selectedOrigin;
+  String? _selectedCondition;
+  String? _selectedFuel;
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +84,7 @@ class _AdPost2State extends State<AdPost2> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 30,
-              ),
+              SizedBox(height: 30),
               Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFFFAFAFA),
@@ -102,189 +95,67 @@ class _AdPost2State extends State<AdPost2> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Make',
-                            style: TextStyle(
-                              color: Color(0xFF000000),
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 100,
-                          ),
-                          Expanded(
-                            child: VehicleMake(
-                              selectedMake: _selectedMake,
-                              makes: makes, // List of vehicle makes
-                              onChanged: (String? make) {
-                                setState(() {
-                                  _selectedMake = make;
-                                });
-                              },
-                            ),
-                          )
-                        ],
+                    buildDropdown(
+                      'Make',
+                      VehicleMake(
+                        selectedMake: _selectedMake,
+                        makes: makes,
+                        onChanged: (String? make) {
+                          setState(() {
+                            _selectedMake = make;
+                          });
+                        },
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Model',
-                            style: TextStyle(
-                              color: Color(0xFF000000),
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 95,
-                          ),
-                          Expanded(
-                            child: VehicleModel(
-                              selectedModel: _selectedModel,
-                              models: models, // List of vehicle models
-                              onChanged: (String? model) {
-                                setState(() {
-                                  _selectedModel = model;
-                                });
-                              },
-                            ),
-                          )
-                        ],
+                    buildDropdown(
+                      'Model',
+                      VehicleModel(
+                        selectedModel: _selectedModel,
+                        models: models,
+                        onChanged: (String? model) {
+                          setState(() {
+                            _selectedModel = model;
+                          });
+                        },
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Origin',
-                            style: TextStyle(
-                              color: Color(0xFF000000),
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 97,
-                          ),
-                          Expanded(
-                            child: Origin(
-                              selectedOrigin: _selectedOrigin,
-                              origin: origin, // List of vehicle models
-                              onChanged: (String? origin) {
-                                setState(() {
-                                  _selectedOrigin = origin;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
+                    buildDropdown(
+                      'Origin',
+                      Origin(
+                        selectedOrigin: _selectedOrigin,
+                        origin: origin,
+                        onChanged: (String? origin) {
+                          setState(() {
+                            _selectedOrigin = origin;
+                          });
+                        },
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Condition',
-                            style: TextStyle(
-                              color: Color(0xFF000000),
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 67,
-                          ),
-                          Expanded(
-                            child: Condition(
-                              selectedCondition: _selectedCondition,
-                              condition: conditions, // List of vehicle models
-                              onChanged: (String? origin) {
-                                setState(() {
-                                  _selectedOrigin = origin;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
+                    buildDropdown(
+                      'Condition',
+                      Condition(
+                        selectedCondition: _selectedCondition,
+                        condition: conditions,
+                        onChanged: (String? condition) {
+                          setState(() {
+                            _selectedCondition = condition;
+                          });
+                        },
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Fuel',
-                            style: TextStyle(
-                              color: Color(0xFF000000),
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 110,
-                          ),
-                          Expanded(
-                            child: Fuel(
-                              selectedFuel: _selectedFuel,
-                              fuel: fuel,
-                              onChanged: (String? fuel) {
-                                setState(() {
-                                  _selectedFuel = fuel;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
+                    buildDropdown(
+                      'Fuel',
+                      Fuel(
+                        selectedFuel: _selectedFuel,
+                        fuel: fuel,
+                        onChanged: (String? fuel) {
+                          setState(() {
+                            _selectedFuel = fuel;
+                          });
+                        },
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'Year',
-                            style: TextStyle(
-                              color: Color(0xFF000000),
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 105,
-                          ),
-                          Expanded(
-                            child: InputFields(hintText: 'Year', width1: 1),
-                          ),
-                        ],
-                      ),
-                    ),
+                    buildYearInput(),
                     SizedBox(height: 40),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -292,10 +163,54 @@ class _AdPost2State extends State<AdPost2> {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildDropdown(String label, Widget dropdown) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: TextStyle(
+              color: Color(0xFF000000),
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(width: 100),
+          Expanded(child: dropdown),
+        ],
+      ),
+    );
+  }
+
+  Widget buildYearInput() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: const [
+          Text(
+            'Year',
+            style: TextStyle(
+              color: Color(0xFF000000),
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(width: 105),
+          Expanded(
+            child: InputFields(hintText: 'Year', width1: 1),
+          ),
+        ],
       ),
     );
   }

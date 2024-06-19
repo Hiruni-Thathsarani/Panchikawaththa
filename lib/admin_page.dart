@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:my_app/screens/Category.dart';
 import 'package:my_app/screens/orders.dart';
 import 'package:my_app/screens/product.dart';
+import 'package:my_app/screens/search_page.dart';
 import 'package:my_app/screens/sellers.dart';
 import 'package:my_app/view_page.dart';
 import 'package:my_app/screens/manage_accounts.dart';
-import 'package:my_app/screens/ads.dart';
 import 'package:my_app/screens/adpost1.dart';
 import 'package:my_app/screens/piechart.dart';
 import 'package:my_app/screens/barchart.dart';
-//import 'package:my_app/screens/digitDisplay.dart';
 import 'package:my_app/screens/monthly_visits.dart';
 
 class AdminPage extends StatefulWidget {
@@ -20,6 +19,14 @@ class AdminPage extends StatefulWidget {
 }
 
 class _AdminPageState extends State<AdminPage> {
+  // Placeholder counts, replace these with actual data from your backend
+  int sellersCount = 10;
+  int buyersCount = 25;
+  int adsCount = 15;
+  int ordersCount = 20;
+  int productsCount = 30;
+  int categoriesCount = 5;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -110,7 +117,8 @@ class _AdminPageState extends State<AdminPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _buildSquareButton(
-                    labelText: ' Sellers',
+                    labelText: 'Sellers',
+                    count: sellersCount,
                     icon: Icons.person,
                     onPressed: () {
                       Navigator.of(context)
@@ -120,7 +128,8 @@ class _AdminPageState extends State<AdminPage> {
                     },
                   ),
                   _buildSquareButton(
-                    labelText: ' Buyers',
+                    labelText: 'Buyers',
+                    count: buyersCount,
                     icon: Icons.shopping_cart,
                     onPressed: () {
                       Navigator.of(context)
@@ -136,17 +145,19 @@ class _AdminPageState extends State<AdminPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _buildSquareButton(
-                    labelText: ' Ads',
+                    labelText: 'Ads',
+                    count: adsCount,
                     icon: Icons.library_books,
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) {
-                        return const Ads();
+                        return const search_page();
                       }));
                     },
                   ),
                   _buildSquareButton(
-                    labelText: ' Orders',
+                    labelText: 'Orders',
+                    count: ordersCount,
                     icon: Icons.trolley,
                     onPressed: () {
                       Navigator.of(context)
@@ -162,7 +173,8 @@ class _AdminPageState extends State<AdminPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _buildSquareButton(
-                    labelText: ' Products',
+                    labelText: 'Products',
+                    count: productsCount,
                     icon: Icons.car_rental,
                     onPressed: () {
                       Navigator.of(context)
@@ -172,7 +184,8 @@ class _AdminPageState extends State<AdminPage> {
                     },
                   ),
                   _buildSquareButton(
-                    labelText: ' Categories',
+                    labelText: 'Categories',
+                    count: categoriesCount,
                     icon: Icons.category,
                     onPressed: () {
                       Navigator.of(context)
@@ -283,6 +296,7 @@ class _AdminPageState extends State<AdminPage> {
 
   Widget _buildSquareButton({
     required String labelText,
+    required int count,
     required IconData icon,
     required VoidCallback onPressed,
   }) {
@@ -296,12 +310,25 @@ class _AdminPageState extends State<AdminPage> {
           color: const Color(0xFFEBEBEB),
         ),
         padding: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon),
-            const SizedBox(width: 5),
-            Text(labelText),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(icon),
+                const SizedBox(width: 5),
+                Text(labelText),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Text(
+              '$count', // Display the count
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+              ),
+            ),
           ],
         ),
       ),

@@ -1,5 +1,3 @@
-
-// ignore_for_file: library_private_types_in_public_api
 import 'package:flutter/material.dart';
 
 class Condition extends StatefulWidget {
@@ -7,7 +5,6 @@ class Condition extends StatefulWidget {
   final List<String> condition;
   final void Function(String?) onChanged;
 
-  // ignore: use_super_parameters
   const Condition({
     Key? key,
     required this.selectedCondition,
@@ -25,7 +22,7 @@ class _ConditionState extends State<Condition> {
     return DropdownButtonFormField<String>(
       value: widget.selectedCondition,
       decoration: InputDecoration(
-        labelText: 'All',
+        labelText: 'Condition',
         filled: true,
         fillColor: const Color(0xFFEBEBEB),
         enabledBorder: OutlineInputBorder(
@@ -47,3 +44,4 @@ class _ConditionState extends State<Condition> {
     );
   }
 }
+
