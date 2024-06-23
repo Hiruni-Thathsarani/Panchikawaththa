@@ -25,26 +25,42 @@ class PieChartWidget extends StatelessWidget {
     return Center(
       child: Container(
         padding: EdgeInsets.all(16.0), // Optional padding
-        child: pie_chart.PieChart(
-          dataMap: dataMap,
-          colorList: colorList,
-          chartRadius: MediaQuery.of(context).size.width / 2.5, // Adjusted size
-          ringStrokeWidth: 24,
-          animationDuration: Duration(seconds: 2), // Animation duration
-          chartValuesOptions: pie_chart.ChartValuesOptions(
-            showChartValues: true,
-            showChartValuesOutside: true,
-            showChartValuesInPercentage: true,
-            showChartValueBackground: false,
-            decimalPlaces: 1, // One decimal place for readability
-          ),
-          legendOptions: pie_chart.LegendOptions(
-            showLegends: true,
-            legendShape: BoxShape.rectangle,
-            legendTextStyle: TextStyle(fontSize: 15),
-            legendPosition: pie_chart.LegendPosition.bottom, // Legend position
-            showLegendsInRow: true,
-          ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Most Viewed Ads',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(
+                height: 20.0), // Space between the title and the pie chart
+            pie_chart.PieChart(
+              dataMap: dataMap,
+              colorList: colorList,
+              chartRadius:
+                  MediaQuery.of(context).size.width / 2.5, // Adjusted size
+              ringStrokeWidth: 24,
+              animationDuration: Duration(seconds: 2), // Animation duration
+              chartValuesOptions: const pie_chart.ChartValuesOptions(
+                showChartValues: true,
+                showChartValuesOutside: true,
+                showChartValuesInPercentage: true,
+                showChartValueBackground: false,
+                decimalPlaces: 1, // One decimal place for readability
+              ),
+              legendOptions: const pie_chart.LegendOptions(
+                showLegends: true,
+                legendShape: BoxShape.rectangle,
+                legendTextStyle: TextStyle(fontSize: 15),
+                legendPosition:
+                    pie_chart.LegendPosition.bottom, // Legend position
+                showLegendsInRow: true,
+              ),
+            ),
+          ],
         ),
       ),
     );

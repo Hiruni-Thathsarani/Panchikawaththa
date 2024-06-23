@@ -9,6 +9,7 @@ import 'package:my_app/screens/profile_page.dart';
 import 'package:my_app/screens/sellers.dart';
 import 'package:my_app/screens/search_page.dart';
 import 'package:my_app/screens/adpost1.dart';
+import 'package:my_app/screens/view_Analytics.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 25, 20, 19)),
         useMaterial3: true,
       ),
-      home: const BuyScreen(),
+      home: const AdPost1(),
     );
   }
 }

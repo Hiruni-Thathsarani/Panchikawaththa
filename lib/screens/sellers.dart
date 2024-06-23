@@ -1,79 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/admin_page.dart';
 
-class Seller {
+class Sellers {
   final String username;
+  final String userContact;
   final String contactDetails;
   final String profilePictureUrl;
-  final String summary;
+  final int totalAds;
 
-  Seller({
+  Sellers({
     required this.username,
+    required this.userContact,
     required this.contactDetails,
     required this.profilePictureUrl,
-    required this.summary,
+    required this.totalAds,
   });
 }
 
-final List<Seller> _sellers = List<Seller>.generate(100, (int index) {
-  return Seller(
-    username: 'User $index',
-    contactDetails: 'user$index@example.com\n+1234567890',
-    profilePictureUrl:
-        'https://via.placeholder.com/150', // Placeholder image URL
-    summary: 'This is a summary for User $index.',
-  );
-});
+class SellersPage extends StatefulWidget {
+  const SellersPage({super.key});
 
-class AppBarApp extends StatelessWidget {
-  const AppBarApp({super.key});
+  @override
+  _SellersPageState createState() => _SellersPageState();
+}
+
+class _SellersPageState extends State<SellersPage> {
+  final List<Sellers> sellers = [
+    Sellers(
+      username: 'john_doe',
+      userContact: '0774703170',
+      contactDetails: 'john.doe@example.com',
+      profilePictureUrl: 'https://via.placeholder.com/150',
+      totalAds: 5,
+    ),
+    Sellers(
+      username: 'jane_smith',
+      userContact: '0713456717',
+      contactDetails: 'jane.smith@example.com',
+      profilePictureUrl: 'https://via.placeholder.com/150',
+      totalAds: 8,
+    ),
+    // Add more sellers as needed
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        colorSchemeSeed: Color.fromARGB(255, 223, 186, 90),
-        useMaterial3: true,
-      ),
-      home: const AppBarExample(),
-    );
-  }
-}
-
-class AppBarExample extends StatefulWidget {
-  const AppBarExample({super.key});
-
-  @override
-  State<AppBarExample> createState() => _AppBarExampleState();
-}
-
-class _AppBarExampleState extends State<AppBarExample> {
-  bool shadowColor = false;
-  double? scrolledUnderElevation;
-
-  @override
-  Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final Color evenItemColor = colorScheme.primary.withOpacity(0.5);
+    final Color oddItemColor = const Color(0xFFFF5C00).withOpacity(1);
+    final Color evenItemColor = const Color(0xFFFF5C00).withOpacity(1);
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-              return AdminPage();
+              return const AdminPage();
             }));
           },
         ),
         title: const Text('Sellers'),
-        scrolledUnderElevation: scrolledUnderElevation,
-        shadowColor:
-            shadowColor ? Theme.of(context).colorScheme.shadow : oddItemColor,
       ),
       body: GridView.builder(
-        itemCount: _sellers.length,
+        itemCount: sellers.length,
         padding: const EdgeInsets.all(8.0),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 1,
@@ -82,9 +70,9 @@ class _AppBarExampleState extends State<AppBarExample> {
           crossAxisSpacing: 10.0,
         ),
         itemBuilder: (BuildContext context, int index) {
-          final seller = _sellers[index];
+          final seller = sellers[index];
           return Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
@@ -96,7 +84,7 @@ class _AppBarExampleState extends State<AppBarExample> {
                   radius: 40,
                   backgroundImage: NetworkImage(seller.profilePictureUrl),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,13 +92,13 @@ class _AppBarExampleState extends State<AppBarExample> {
                     children: [
                       Text(
                         seller.username,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(seller.contactDetails),
-                      Text(seller.summary),
+                      Text('Total posted Ads = ${seller.totalAds}'),
                     ],
                   ),
                 ),
@@ -119,14 +107,14 @@ class _AppBarExampleState extends State<AppBarExample> {
           );
         },
       ),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: const BottomAppBar(
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(8),
           child: OverflowBar(
             overflowAlignment: OverflowBarAlignment.center,
             alignment: MainAxisAlignment.center,
             overflowSpacing: 5.0,
-            children: const <Widget>[
+            children: <Widget>[
               SizedBox(width: 5),
             ],
           ),
@@ -134,8 +122,4 @@ class _AppBarExampleState extends State<AppBarExample> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(const AppBarApp());
 }

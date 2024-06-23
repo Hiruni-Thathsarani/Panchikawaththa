@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/screens/Category.dart';
+import 'package:my_app/screens/buyer.dart';
 import 'package:my_app/screens/orders.dart';
 import 'package:my_app/screens/product.dart';
 import 'package:my_app/screens/search_page.dart';
-import 'package:my_app/screens/sellers.dart';
-import 'package:my_app/view_page.dart';
+import 'package:my_app/screens/Sellers.dart';
+import 'package:my_app/screens/view_Analytics.dart';
 import 'package:my_app/screens/manage_accounts.dart';
 import 'package:my_app/screens/adpost1.dart';
 import 'package:my_app/screens/piechart.dart';
@@ -24,8 +25,8 @@ class _AdminPageState extends State<AdminPage> {
   int buyersCount = 25;
   int adsCount = 15;
   int ordersCount = 20;
-  int productsCount = 30;
-  int categoriesCount = 5;
+  int sparepartsCount = 30;
+  int servicesCount = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +34,15 @@ class _AdminPageState extends State<AdminPage> {
       length: 4,
       child: Scaffold(
         appBar: AppBar(
-          title: Row(
+          title: const Row(
             children: [
-              IconButton(
-                onPressed: () {
-                  // Handle back button action here
-                },
-                icon: const Icon(Icons.arrow_back),
-              ),
-              const Text('My profile'),
+              // IconButton(
+              //   onPressed: () {
+              //     // Handle back button action here
+              //   },
+              //   icon: const Icon(Icons.arrow_back),
+              // ),
+              Text('My profile'),
             ],
           ),
         ),
@@ -83,7 +84,7 @@ class _AdminPageState extends State<AdminPage> {
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) {
-                        return ViewPage();
+                        return ViewAnalyticApp();
                       }));
                     },
                     style: ElevatedButton.styleFrom(
@@ -123,7 +124,7 @@ class _AdminPageState extends State<AdminPage> {
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) {
-                        return const AppBarApp();
+                        return const SellersPage();
                       }));
                     },
                   ),
@@ -134,7 +135,7 @@ class _AdminPageState extends State<AdminPage> {
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) {
-                        return const AppBarApp();
+                        return const Buyers();
                       }));
                     },
                   ),
@@ -156,9 +157,9 @@ class _AdminPageState extends State<AdminPage> {
                     },
                   ),
                   _buildSquareButton(
-                    labelText: 'Orders',
+                    labelText: 'Vehicle',
                     count: ordersCount,
-                    icon: Icons.trolley,
+                    icon: Icons.airport_shuttle_rounded,
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) {
@@ -173,8 +174,8 @@ class _AdminPageState extends State<AdminPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   _buildSquareButton(
-                    labelText: 'Products',
-                    count: productsCount,
+                    labelText: 'Spareparts',
+                    count: sparepartsCount,
                     icon: Icons.car_rental,
                     onPressed: () {
                       Navigator.of(context)
@@ -184,9 +185,9 @@ class _AdminPageState extends State<AdminPage> {
                     },
                   ),
                   _buildSquareButton(
-                    labelText: 'Categories',
-                    count: categoriesCount,
-                    icon: Icons.category,
+                    labelText: 'Services',
+                    count: servicesCount,
+                    icon: Icons.add_business,
                     onPressed: () {
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (_) {

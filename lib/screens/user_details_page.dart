@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/screens/User.dart';
-import 'package:my_app/screens/manage_accounts.dart';
 
 class UserDetailsPage extends StatefulWidget {
   final User user;
@@ -8,6 +7,7 @@ class UserDetailsPage extends StatefulWidget {
   const UserDetailsPage({Key? key,  required this.user}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _UserDetailsPageState createState() => _UserDetailsPageState();
 }
 
@@ -64,54 +64,54 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 backgroundImage:
                     AssetImage(''), // Replace with actual image path
                 radius: 50,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 controller: nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Name'),
                 readOnly: !isEditable,
               ),
               TextField(
                 controller: emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'Email'),
                 readOnly: !isEditable,
               ),
               TextField(
                 controller: contactController,
-                decoration: InputDecoration(labelText: 'Contact'),
+                decoration: const InputDecoration(labelText: 'Contact'),
                 readOnly: !isEditable,
               ),
-              SizedBox(height: 20),
-              Text('Seller Details',
+              const SizedBox(height: 20),
+              const Text('Seller Details',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
               TextField(
                 controller: businessNameController,
-                decoration: InputDecoration(labelText: 'Business Name'),
+                decoration: const InputDecoration(labelText: 'Business Name'),
                 readOnly: !isEditable,
               ),
               TextField(
                 controller: businessContactController,
-                decoration: InputDecoration(labelText: 'Business Contact No'),
+                decoration: const InputDecoration(labelText: 'Business Contact No'),
                 readOnly: !isEditable,
               ),
               TextField(
                 controller: businessDescriptionController,
-                decoration: InputDecoration(labelText: 'Business Description'),
+                decoration: const InputDecoration(labelText: 'Business Description'),
                 readOnly: !isEditable,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
                     onPressed: toggleEdit,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFFF5C00),
-                      foregroundColor: Color(0xFFFFFFFF),
+                      backgroundColor: const Color(0xFFFF5C00),
+                      foregroundColor: const Color(0xFFFFFFFF),
                     ),
                     child: Text(isEditable ? 'Cancel' : 'Edit'),
                   ),
@@ -137,10 +137,10 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                           }
                         : null,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFFF5C00),
-                      foregroundColor: Color(0xFFFFFFFF),
+                      backgroundColor: const Color(0xFFFF5C00),
+                      foregroundColor: const Color(0xFFFFFFFF),
                     ),
-                    child: Text('Update'),
+                    child: const Text('Update'),
                   ),
                 ],
               ),

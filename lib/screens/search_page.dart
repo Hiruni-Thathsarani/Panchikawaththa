@@ -1,9 +1,9 @@
-// ignore_for_file: camel_case_types, prefer_const_literals_to_create_immutables, prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:my_app/screens/buy_screen.dart';
 import 'package:my_app/screens/filter_sort.dart';
+import 'package:my_app/admin_page.dart';
 
+// ignore: camel_case_types
 class search_page extends StatefulWidget {
   const search_page({super.key});
 
@@ -11,19 +11,28 @@ class search_page extends StatefulWidget {
   State<search_page> createState() => _search_pageState();
 }
 
+// ignore: camel_case_types
 class _search_pageState extends State<search_page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: const Icon(
-          Icons.arrow_back_rounded,
-          size: 30,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AdminPage()),
+            );
+          },
+          child: const Icon(
+            Icons.arrow_back_rounded,
+            size: 30,
+          ),
         ),
         elevation: 0,
-        actions: [
-          const Row(
+        actions: const [
+          Row(
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -33,7 +42,7 @@ class _search_pageState extends State<search_page> {
                     height: 8,
                   ),
                   Text(
-                    'Buyer',
+                    'Admin',
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w300,
@@ -57,7 +66,7 @@ class _search_pageState extends State<search_page> {
               ),
             ],
           ),
-          const SizedBox(
+          SizedBox(
             width: 5,
           )
         ],
@@ -95,31 +104,31 @@ class _search_pageState extends State<search_page> {
               ),
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.location_on_rounded,
                     color: Color(0xffFF5C01),
                     size: 25,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
-                  Text(
+                  const Text(
                     'Location',
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
                         color: Color(0xffFF5C01)),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => FilterSortScreen()),
+                            builder: (context) => const FilterSortScreen()),
                       );
                     },
-                    child: Row(
+                    child: const Row(
                       children: [
                         Text(
                           'Filter & sort',
