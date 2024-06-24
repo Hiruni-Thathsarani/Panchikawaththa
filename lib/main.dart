@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 25, 20, 19)),
         useMaterial3: true,
       ),
-      home: const AdPost1(),
+      home: const AdminPage(),
     );
   }
 }
