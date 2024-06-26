@@ -20,11 +20,13 @@ class PieChartWidget extends StatelessWidget {
     const Color(0xFF325D79), // Color 5
   ];
 
+   PieChartWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        padding: EdgeInsets.all(16.0), // Optional padding
+        padding: const EdgeInsets.all(16.0), // Optional padding
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -43,7 +45,7 @@ class PieChartWidget extends StatelessWidget {
               chartRadius:
                   MediaQuery.of(context).size.width / 2.5, // Adjusted size
               ringStrokeWidth: 24,
-              animationDuration: Duration(seconds: 2), // Animation duration
+              animationDuration: const Duration(seconds: 2), // Animation duration
               chartValuesOptions: const pie_chart.ChartValuesOptions(
                 showChartValues: true,
                 showChartValuesOutside: true,

@@ -80,21 +80,21 @@ class _ManageAccountState extends State<ManageAccount> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Delete Account'),
-          content: Text('Are you sure you want to delete this user account?'),
+          title: const Text('Delete Account'),
+          content: const Text('Are you sure you want to delete this user account?'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
-              child: Text('No'),
+              child: const Text('No'),
             ),
             TextButton(
               onPressed: () {
                 deleteUser(user);
                 Navigator.of(context).pop(); // Close the dialog
               },
-              child: Text('Yes, Delete'),
+              child: const Text('Yes, Delete'),
             ),
           ],
         );
@@ -115,7 +115,7 @@ class _ManageAccountState extends State<ManageAccount> {
             child: TextField(
               controller: searchController,
               onChanged: filterUsers,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Search Users',
                 border: OutlineInputBorder(),
               ),
@@ -138,7 +138,7 @@ class _ManageAccountState extends State<ManageAccount> {
                     children: [
                       Text(user.activity),
                       IconButton(
-                        icon: Icon(Icons.delete, color: Color(0xFFFF5C00)),
+                        icon: const Icon(Icons.delete, color: Color(0xFFFF5C00)),
                         onPressed: () {
                           showDeleteConfirmationDialog(user);
                         },

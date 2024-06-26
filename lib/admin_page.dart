@@ -11,10 +11,13 @@ import 'package:my_app/screens/orders.dart';
 import 'package:my_app/screens/piechart.dart';
 import 'package:my_app/screens/product.dart';
 import 'package:my_app/screens/search_page.dart';
+import 'package:my_app/screens/sellerLocation.dart';
+import 'package:my_app/screens/sparePartsDetails.dart';
+import 'package:my_app/screens/vehicle_details.dart';
 import 'package:my_app/screens/view_Analytics.dart'; // Update with your actual import paths
 
 class AdminPage extends StatefulWidget {
-  const AdminPage({Key? key}) : super(key: key);
+  const AdminPage({super.key});
 
   @override
   State<AdminPage> createState() => _AdminPageState();
@@ -28,6 +31,7 @@ class _AdminPageState extends State<AdminPage> {
     super.initState();
     _futureData = fetchData();
   }
+
   Future<Map<String, int>> fetchData() async {
     try {
       var url = Uri.parse('http://10.0.2.2:8000/api/details');
@@ -63,7 +67,7 @@ class _AdminPageState extends State<AdminPage> {
           future: _futureData,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasError) {
@@ -74,7 +78,7 @@ class _AdminPageState extends State<AdminPage> {
               var data = snapshot.data!;
               return buildContent(data);
             } else {
-              return Center(
+              return const Center(
                 child: Text('No data available'),
               );
             }
@@ -140,7 +144,7 @@ class _AdminPageState extends State<AdminPage> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return ViewAnalyticApp();
+                    return const ViewAnalyticApp();
                   }));
                 },
                 style: ElevatedButton.styleFrom(
@@ -175,7 +179,7 @@ class _AdminPageState extends State<AdminPage> {
                 icon: Icons.person,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return const SellersPage();
+                    return  DashboardScreen();
                   }));
                 },
               ),
@@ -185,7 +189,7 @@ class _AdminPageState extends State<AdminPage> {
                 icon: Icons.shopping_cart,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return const Buyers();
+                    return  Buyer();
                   }));
                 },
               ),
@@ -211,7 +215,7 @@ class _AdminPageState extends State<AdminPage> {
                 icon: Icons.airport_shuttle_rounded,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return const Orders();
+                    return VehicleDetails();
                   }));
                 },
               ),
@@ -227,7 +231,7 @@ class _AdminPageState extends State<AdminPage> {
                 icon: Icons.car_rental,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return const Product();
+                    return  SparePartsApp();
                   }));
                 },
               ),
@@ -243,7 +247,8 @@ class _AdminPageState extends State<AdminPage> {
               ),
             ],
           ),
-          const SizedBox(height: 0),
+          const SizedBox(height: 50
+          ),
           Container(
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: 16),

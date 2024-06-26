@@ -10,7 +10,7 @@ class Product extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        colorSchemeSeed: Color.fromARGB(255, 223, 186, 90),
+        colorSchemeSeed: const Color.fromARGB(255, 223, 186, 90),
         useMaterial3: true,
       ),
       home: const AppBarExample(),
@@ -38,10 +38,10 @@ class _AppBarExampleState extends State<AppBarExample> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                        return AdminPage();
+                        return const AdminPage();
                       }));
                     },
         ),
@@ -60,7 +60,7 @@ class _AppBarExampleState extends State<AppBarExample> {
         ),
         itemBuilder: (BuildContext context, int index) {
           if (index == 0) {
-            return Center();
+            return const Center();
           }
           return Container(
             alignment: Alignment.center,
@@ -72,14 +72,14 @@ class _AppBarExampleState extends State<AppBarExample> {
           );
         },
       ),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: const BottomAppBar(
         child: Padding(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(8),
           child: OverflowBar(
             overflowAlignment: OverflowBarAlignment.center,
             alignment: MainAxisAlignment.center,
             overflowSpacing: 5.0,
-            children: const <Widget>[
+            children: <Widget>[
               SizedBox(width: 5),
             ],
           ),

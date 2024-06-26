@@ -6,11 +6,11 @@ class Condition extends StatefulWidget {
   final void Function(String?) onChanged;
 
   const Condition({
-    Key? key,
+    super.key,
     required this.selectedCondition,
     required this.condition,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   _ConditionState createState() => _ConditionState();

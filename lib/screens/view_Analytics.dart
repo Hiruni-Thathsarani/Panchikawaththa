@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:my_app/admin_page.dart';
 
 void main() {
-  runApp(ViewAnalyticApp());
+  runApp(const ViewAnalyticApp());
 }
 
 class ViewAnalyticApp extends StatelessWidget {
+  const ViewAnalyticApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: ViewAnalytic(),
     );
   }
@@ -43,9 +45,9 @@ class _ViewAnalyticState extends State<ViewAnalytic> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFFFFFFF),
+        backgroundColor: const Color(0xFFFFFFFF),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (_) {
               return const AdminPage();
@@ -53,23 +55,23 @@ class _ViewAnalyticState extends State<ViewAnalytic> {
           },
         ),
       ),
-      backgroundColor: Color(0xFFFFFFFF), // Background color
+      backgroundColor: const Color(0xFFFFFFFF), // Background color
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 5),
+              const SizedBox(height: 1),
               const Text(
-                'Welcome, Admin',
+                'Daily Records',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               const Text(
                 '8:00 AM\nMon 4th, Feb',
                 style: TextStyle(
@@ -77,7 +79,7 @@ class _ViewAnalyticState extends State<ViewAnalytic> {
                   fontSize: 16,
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -91,13 +93,13 @@ class _ViewAnalyticState extends State<ViewAnalytic> {
                       'deleted', data['cancel'].toString(), Colors.red),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _buildInfoCard(
                   'Today Ads', data['todayJobs'].toString(), Icons.assignment),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               _buildInfoCard(
                   'Today Revenue', data['todayRevenue'], Icons.attach_money),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -107,9 +109,9 @@ class _ViewAnalyticState extends State<ViewAnalytic> {
                       data['ridersOnline'].toString(), Icons.directions_bike),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               _buildMonthlyTargetCard(data['monthlyOrderTarget']),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -134,7 +136,7 @@ class _ViewAnalyticState extends State<ViewAnalytic> {
 
   Widget _buildStatusCard(String title, String count, Color color) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(10),
@@ -143,12 +145,12 @@ class _ViewAnalyticState extends State<ViewAnalytic> {
         children: [
           Text(
             title,
-            style: TextStyle(color: Colors.white, fontSize: 16),
+            style: const TextStyle(color: Colors.white, fontSize: 16),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Text(
             count,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ],
@@ -158,9 +160,9 @@ class _ViewAnalyticState extends State<ViewAnalytic> {
 
   Widget _buildInfoCard(String title, String data, IconData icon) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 108, 107, 109),
+        color: const Color.fromARGB(255, 108, 107, 109),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -172,7 +174,7 @@ class _ViewAnalyticState extends State<ViewAnalytic> {
             children: [
               Text(
                 title,
-                style: TextStyle(color: Colors.white70, fontSize: 16),
+                style: const TextStyle(color: Colors.white70, fontSize: 16),
               ),
               Text(
                 data,
@@ -190,9 +192,9 @@ class _ViewAnalyticState extends State<ViewAnalytic> {
 
   Widget _buildMonthlyTargetCard(String target) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Color(0xFFFFA500),
+        color: const Color(0xFFFFA500),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -207,7 +209,7 @@ class _ViewAnalyticState extends State<ViewAnalytic> {
             style: const TextStyle(
                 color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          Icon(Icons.tablet, color: Colors.white, size: 30),
+          const Icon(Icons.tablet, color: Colors.white, size: 30),
         ],
       ),
     );
@@ -216,10 +218,10 @@ class _ViewAnalyticState extends State<ViewAnalytic> {
   Widget _buildSummaryCard(String title, String data) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.all(16),
-        margin: EdgeInsets.all(4),
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.all(4),
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 177, 174, 180),
+          color: const Color.fromARGB(255, 177, 174, 180),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
@@ -227,11 +229,11 @@ class _ViewAnalyticState extends State<ViewAnalytic> {
           children: [
             Text(
               title,
-              style: TextStyle(color: Colors.white70, fontSize: 16),
+              style: const TextStyle(color: Colors.white70, fontSize: 16),
             ),
             Text(
               data,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),

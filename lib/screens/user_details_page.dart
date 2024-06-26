@@ -4,7 +4,7 @@ import 'package:my_app/screens/User.dart';
 class UserDetailsPage extends StatefulWidget {
   final User user;
 
-  const UserDetailsPage({Key? key,  required this.user}) : super(key: key);
+  const UserDetailsPage({super.key,  required this.user});
 
   @override
   // ignore: library_private_types_in_public_api

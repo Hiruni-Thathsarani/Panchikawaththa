@@ -218,7 +218,7 @@ class _AdPost1State extends State<AdPost1> {
                 child: CustomButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                      return AdPost2();
+                      return const AdPost2();
                     }));
                   },
                   text: 'Next',
@@ -236,7 +236,7 @@ class InputFields extends StatelessWidget {
   final String hintText;
   final int width1;
 
-  const InputFields({required this.hintText, required this.width1});
+  const InputFields({super.key, required this.hintText, required this.width1});
 
   @override
   Widget build(BuildContext context) {

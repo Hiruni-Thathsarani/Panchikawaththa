@@ -80,11 +80,11 @@ class _AdPost2State extends State<AdPost2> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFFFAFAFA),
@@ -156,8 +156,8 @@ class _AdPost2State extends State<AdPost2> {
                       ),
                     ),
                     buildYearInput(),
-                    SizedBox(height: 40),
-                    Row(
+                    const SizedBox(height: 40),
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [],
                     ),
@@ -179,13 +179,13 @@ class _AdPost2State extends State<AdPost2> {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xFF000000),
               fontSize: 17,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(width: 100),
+          const SizedBox(width: 100),
           Expanded(child: dropdown),
         ],
       ),
@@ -195,9 +195,9 @@ class _AdPost2State extends State<AdPost2> {
   Widget buildYearInput() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: const [
+        children: [
           Text(
             'Year',
             style: TextStyle(

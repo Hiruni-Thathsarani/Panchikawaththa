@@ -45,8 +45,10 @@ class _SellersPageState extends State<SellersPage> {
 
   @override
   Widget build(BuildContext context) {
-    final Color oddItemColor = const Color(0xFFFF5C00).withOpacity(1);
-    final Color evenItemColor = const Color(0xFFFF5C00).withOpacity(1);
+    final Color oddItemColor =
+        Color.fromARGB(255, 252, 208, 208).withOpacity(1);
+    final Color evenItemColor =
+        Color.fromARGB(255, 241, 241, 241).withOpacity(1);
 
     return Scaffold(
       appBar: AppBar(

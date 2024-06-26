@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/admin_page.dart';
 import 'package:my_app/screens/buy_screen.dart';
 import 'package:my_app/screens/manage_accounts.dart';
-import 'package:my_app/screens/post_success.dart';
-import 'package:my_app/screens/profile_page.dart';
+import 'package:my_app/screens/sellerLocation.dart';
 import 'package:my_app/screens/sellers.dart';
 import 'package:my_app/screens/search_page.dart';
 import 'package:my_app/screens/adpost1.dart';
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 25, 20, 19)),
         useMaterial3: true,
       ),
-      home: const AdminPage(),
+      home:  AdminPage(),
     );
   }
 }

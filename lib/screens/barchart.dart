@@ -12,15 +12,17 @@ class BarChartWidget extends StatelessWidget {
   final syncfusion_charts.TooltipBehavior _tooltip =
       syncfusion_charts.TooltipBehavior(enable: true);
 
+  BarChartWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
+      child: SizedBox(
         height: 220,
         width: 270, // Adjust chart height as needed
         child: syncfusion_charts.SfCartesianChart(
-          primaryXAxis: syncfusion_charts.CategoryAxis(),
-          primaryYAxis: syncfusion_charts.NumericAxis(
+          primaryXAxis: const syncfusion_charts.CategoryAxis(),
+          primaryYAxis: const syncfusion_charts.NumericAxis(
             minimum: 0,
             maximum: 40,
             interval: 10,
@@ -32,7 +34,7 @@ class BarChartWidget extends StatelessWidget {
               xValueMapper: (_ChartData data, _) => data.x,
               yValueMapper: (_ChartData data, _) => data.y,
               name: 'Total',
-              color: Color(0xFFFF5C01),
+              color: const Color(0xFFFF5C01),
             ),
           ],
         ),

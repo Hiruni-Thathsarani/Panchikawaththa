@@ -6,7 +6,7 @@ class MonthlyVisitsWidget extends StatelessWidget {
   final int engagedCount;
   final int eoiSentCount;
 
-  MonthlyVisitsWidget({
+  const MonthlyVisitsWidget({super.key, 
     required this.openedCount,
     required this.engagedCount,
     required this.eoiSentCount,
@@ -34,34 +34,34 @@ class MonthlyVisitsWidget extends StatelessWidget {
                 child: CircularProgressIndicator(
                   value: openedCount / 100.0,
                   backgroundColor: Colors.orange.withOpacity(0.3),
-                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFFFF5C00)),
+                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFFFF5C00)),
                   strokeWidth: 7,
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 180,
                 height: 180,
                 child: CircularProgressIndicator(
                   value: engagedCount / 100.0,
-                  backgroundColor: Color(0xFF9BD7D1).withOpacity(0.3),
-                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF9BD7D1)),
+                  backgroundColor: const Color(0xFF9BD7D1).withOpacity(0.3),
+                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF9BD7D1)),
                   strokeWidth: 7,
                 ),
               ),
-              Container(
+              SizedBox(
                 width: 160,
                 height: 160,
                 child: CircularProgressIndicator(
                   value: eoiSentCount / 100.0,
-                  backgroundColor: Color(0xFF325D79).withOpacity(0.3),
-                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF325D79)),
+                  backgroundColor: const Color(0xFF325D79).withOpacity(0.3),
+                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF325D79)),
                   strokeWidth: 7,
                 ),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Total Visits',
                     style: TextStyle(
                       fontSize: 20,
@@ -79,15 +79,15 @@ class MonthlyVisitsWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildProgressIndicator('Opened', openedCount, Color(0xFFFF5C00)),
+              _buildProgressIndicator('Opened', openedCount, const Color(0xFFFF5C00)),
               _buildProgressIndicator(
-                  'Engaged', engagedCount, Color(0xFF325D79)),
+                  'Engaged', engagedCount, const Color(0xFF325D79)),
               _buildProgressIndicator(
-                  'EOI Sent', eoiSentCount, Color(0xFF9BD7D1)),
+                  'EOI Sent', eoiSentCount, const Color(0xFF9BD7D1)),
             ],
           ),
         ],
@@ -98,7 +98,7 @@ class MonthlyVisitsWidget extends StatelessWidget {
   Widget _buildProgressIndicator(String label, int count, Color color) {
     return Column(
       children: [
-        Container(
+        SizedBox(
           width: 60,
           height: 40,
           child: FAProgressBar(
@@ -107,12 +107,12 @@ class MonthlyVisitsWidget extends StatelessWidget {
             maxValue: 100.0, // Ensure maxValue is double
             backgroundColor: color.withOpacity(0.3),
             progressColor: color,
-            animatedDuration: Duration(seconds: 1),
+            animatedDuration: const Duration(seconds: 1),
             direction: Axis.vertical,
             verticalDirection: VerticalDirection.up,
           ),
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         Text('$label\n$count%', textAlign: TextAlign.center),
       ],
     );
