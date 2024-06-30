@@ -40,10 +40,10 @@ class _AppBarExampleState extends State<AppBarExample> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                        return const AdminPage();
-                      }));
-                    },
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+              return const AdminPage();
+            }));
+          },
         ),
         title: const Text('product'),
         scrolledUnderElevation: scrolledUnderElevation,

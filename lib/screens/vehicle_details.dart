@@ -1,15 +1,65 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:my_app/admin_page.dart';
+import 'package:my_app/screens/vehicle_details_2.dart';
 
-class VehicleDetails extends StatelessWidget {
-  final List<Map<String, dynamic>> carOffers = [
-    {"name": "user1", "price": 54, "details": "Manual - Sedan"},
-    {"name": "user2", "price": 67, "details": "Automatic - Hatch - 100km incl."},
-    {"name": "user3", "price": 75, "details": "Automatic - SUV"},
-    {"name": "user4", "price": 93, "details": "Automatic - SUV"},
-    {"name": "user5", "price": 106, "details": "Automatic - Sedan"},
-    // Add more offers here
-  ];
+class VehicleDetails extends StatefulWidget {
+  @override
+  _VehicleDetailsState createState() => _VehicleDetailsState();
+}
+
+class _VehicleDetailsState extends State<VehicleDetails> {
+  List<Map<String, dynamic>> carOffers = [];
+  List<Map<String, dynamic>> filteredCarOffers = [];
+  TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+    searchController.addListener(() {
+      filterSearchResults(searchController.text);
+    });
+  }
+
+  Future<void> fetchData() async {
+    try {
+      var url = 'http://10.0.2.2:8000/api/vehicle'; // Replace with your backend endpoint
+      var response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        var data = json.decode(response.body) as List;
+        setState(() {
+          carOffers = data.map((offer) => {
+            'userId': offer['userId'].toString(),
+            'price': offer['price'], // Assuming price is an int
+            'details': offer['type'] + ' - ' + offer['model'], // Customize details as needed
+            'type': offer['type'],
+            'make': offer['make'],
+            'model': offer['model'],
+            'year': offer['year'], // Assuming year is an int
+          }).toList();
+          filteredCarOffers = carOffers;
+        });
+      } else {
+        throw Exception('Failed to load data');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  void filterSearchResults(String query) {
+    List<Map<String, dynamic>> filteredList = carOffers.where((offer) {
+      return offer['details'].toLowerCase().contains(query.toLowerCase()) ||
+             offer['userId'].toLowerCase().contains(query.toLowerCase());
+    }).toList();
+
+    setState(() {
+      filteredCarOffers = filteredList;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +100,7 @@ class VehicleDetails extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: TextField(
+                    controller: searchController,
                     style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       hintText: 'Search...',
@@ -62,9 +113,6 @@ class VehicleDetails extends StatelessWidget {
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.3),
                     ),
-                    onChanged: (value) {
-                      // Implement your search functionality here
-                    },
                   ),
                 ),
               ],
@@ -72,16 +120,16 @@ class VehicleDetails extends StatelessWidget {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: carOffers.length,
+              itemCount: filteredCarOffers.length,
               itemBuilder: (context, index) {
-                final offer = carOffers[index];
+                final offer = filteredCarOffers[index];
                 return ListTile(
                   leading: Image.network(
-                    'https://via.placeholder.com/150', // Replace with your image URL
+                    'https://img.freepik.com/free-vector/illustration-user-avatar-icon_53876-5907.jpg?t=st=1719587210~exp=1719590810~hmac=47f1ed93ff752d44c74bdcd2975be13cc931419bbdf0102428030facaa458d97&w=740', // Replace with your image URL
                     width: 50,
                     height: 50,
                   ),
-                  title: Text(offer['name']),
+                  title: Text(offer['userId']),
                   subtitle: Text(offer['details']),
                   trailing: PopupMenuButton<String>(
                     onSelected: (value) {
@@ -98,7 +146,9 @@ class VehicleDetails extends StatelessWidget {
                     icon: Icon(Icons.more_vert),
                   ),
                   onTap: () {
-                    // Handle item tap
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => VehicleListPage(userId: offer['userId']),
+                    ));
                   },
                 );
               },
@@ -108,4 +158,10 @@ class VehicleDetails extends StatelessWidget {
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: VehicleDetails(),
+  ));
 }

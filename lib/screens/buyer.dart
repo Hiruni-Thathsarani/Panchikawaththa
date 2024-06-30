@@ -25,7 +25,8 @@ class SellersScreen extends StatelessWidget {
     },
     {'name': 'David Brown', 'id': '1100', 'image': 'assets/img/david.png'},
     {
-      'name': 'Christopher Wilson','id': '2211',
+      'name': 'Christopher Wilson',
+      'id': '2211',
       'image': 'assets/img/christopher.png'
     },
     {'name': 'Ashley Gonzalez', 'id': '1466', 'image': 'assets/img/ashley.png'},
@@ -47,7 +48,7 @@ class SellersScreen extends StatelessWidget {
             ),
             const SizedBox(
                 width: 10), // Add some space between the icon and the title
-            const Text('Sellers'),
+            const Text('Buyers'),
           ],
         ),
       ),
@@ -75,7 +76,7 @@ class SellersScreen extends StatelessWidget {
                         backgroundImage: AssetImage(sellers[index]['image']!),
                       ),
                       title: Text(sellers[index]['name']!),
-                      subtitle: Text('Seller ID: ${sellers[index]['id']}'),
+                      subtitle: Text('User ID: ${sellers[index]['id']}'),
                       trailing: const Icon(Icons.visibility),
                     ),
                   );
