@@ -28,7 +28,7 @@ class _VehicleListPageState extends State<VehicleListPage> {
 
     try {
       final response = await http.get(
-        Uri.parse('http://10.0.2.2:8000/api/vehicles/${widget.userId}'),
+        Uri.parse('http://10.0.2.2:8000/vehicleDetails/vehicles/${widget.userId}'),
       );
 
       if (response.statusCode == 200) {
@@ -114,7 +114,7 @@ class _VehicleListPageState extends State<VehicleListPage> {
                 } else if (type == 'Motorcycle') {
                   imageUrl = 'https://img.freepik.com/free-photo/black-motorcycle-white_1398-276.jpg?t=st=1719593653~exp=1719597253~hmac=b1f0976d1bfa3f982a12922772344b327669243382c369aa7bfd7bf57f403939&w=996';
                 } else if (type == 'Threewheel') {
-                  imageUrl = 'https://www.casons.lk/thumbnailer.php?url=https://lrnawbodbhe5.objectstorage.uk-london-1.oci.customer-oci.com/p/wu2xha0pJLtGGKV3DjZMer1qsOsjrkKx5tWZK2krsza1dvQdDoOZvqNSQLjcG8sk/n/lrnawbodbhe5/b/ImageStorage/o/casons.lk/VehicleModelmodel/76/thumbnail.png';
+                  imageUrl = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.justdial.com%2Fjdmart%2FErnakulam%2FBajaj-Auto-Rickshaw-Efficient-Three-Wheeler%2Fpid-2020285976%2F0484PX484-X484-210416112425-S6Q7&psig=AOvVaw20OTp6wgS-MKgnx4JZALmV&ust=1719806979224000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCKjmjLG6gocDFQAAAAAdAAAAABAj';
                 } else if (type == 'Van') {
                   imageUrl = 'https://img.freepik.com/premium-photo/3d-render-van_161488-118.jpg?w=1060';
                 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class UsersPage extends StatefulWidget {
   @override
@@ -6,80 +8,15 @@ class UsersPage extends StatefulWidget {
 }
 
 class _UsersPageState extends State<UsersPage> {
-  List<Map<String, String>> contacts = [
-    {
-      'name': 'Nicholas Gordon',
-      'email': 'ernest.mason@gmail.com',
-      'imageUrl': 'https://via.placeholder.com/48', // Placeholder image URL
-      'status': 'Seller',
-      'phone': '123-456-7890',
-      'province': 'Ontario',
-    },
-    {
-      'name': 'Bradley Malone',
-      'email': 'bradley.m@gmail.com',
-      'imageUrl': 'https://via.placeholder.com/48', // Placeholder image URL
-      'status': 'Buyer',
-      'phone': '234-567-8901',
-      'province': 'Quebec',
-    },
-    {
-      'name': 'Janie Todd',
-      'email': 'stroman.hanna@yahoo.com',
-      'imageUrl': 'https://via.placeholder.com/48', // Placeholder image URL
-      'status': 'Seller',
-      'phone': '345-678-9012',
-      'province': 'British Columbia',
-    },
-    {
-      'name': 'Marvin Lambert',
-      'email': 'micaela.okuneva@zemlak.biz',
-      'imageUrl': 'https://via.placeholder.com/48', // Placeholder image URL
-      'status': 'Buyer',
-      'phone': '456-789-0123',
-      'province': 'Alberta',
-    },
-    {
-      'name': 'Teresa Lloyd',
-      'email': 'carlee_erdman@gmail.com',
-      'imageUrl': 'https://via.placeholder.com/48', // Placeholder image URL
-      'status': 'Seller',
-      'phone': '567-890-1234',
-      'province': 'Manitoba',
-    },
-    {
-      'name': 'Fred Haynes',
-      'email': 'jarod.miller@hotmail.com',
-      'imageUrl': 'https://via.placeholder.com/48', // Placeholder image URL
-      'status': 'Buyer',
-      'phone': '678-901-2345',
-      'province': 'Saskatchewan',
-    },
-    {
-      'name': 'Rose Peters',
-      'email': 'oma.russel@hotmail.com',
-      'imageUrl': 'https://via.placeholder.com/48', // Placeholder image URL
-      'status': 'Seller',
-      'phone': '789-012-3456',
-      'province': 'Nova Scotia',
-    },
-    {
-      'name': 'Jose Stone',
-      'email': 'sylvia.stracke@konopelski.ca',
-      'imageUrl': 'https://via.placeholder.com/48', // Placeholder image URL
-      'status': 'Buyer',
-      'phone': '890-123-4567',
-      'province': 'New Brunswick',
-    },
-  ];
-
-  late List<Map<String, String>> filteredContacts;
+  List<Map<String, dynamic>> contacts = [];
+  List<Map<String, dynamic>> filteredContacts = [];
   TextEditingController searchController = TextEditingController();
+  late OverlayEntry _popupDialog;
 
   @override
   void initState() {
     super.initState();
-    filteredContacts = contacts;
+    fetchUsers();
     searchController.addListener(_filterContacts);
   }
 
@@ -90,72 +27,96 @@ class _UsersPageState extends State<UsersPage> {
     super.dispose();
   }
 
+  Future<void> fetchUsers() async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/userDetails/users')); // Update the URL to match your backend
+
+    if (response.statusCode == 200) {
+      setState(() {
+        contacts = List<Map<String, dynamic>>.from(json.decode(response.body));
+        filteredContacts = contacts;
+      });
+    } else {
+      // Handle the error
+      print('Failed to load users');
+    }
+  }
+
   void _filterContacts() {
     final query = searchController.text.toLowerCase();
     setState(() {
       filteredContacts = contacts.where((contact) {
-        final name = contact['name']?.toLowerCase();
-        final email = contact['email']?.toLowerCase();
-        return name!.contains(query) || email!.contains(query);
+        final name = contact['firstName']?.toLowerCase() + ' ' + contact['lastName']?.toLowerCase();
+        final email = contact['email']!.toLowerCase();
+        return name.contains(query) || email.contains(query);
       }).toList();
     });
   }
 
-  void _showUserDetails(BuildContext context, Map<String, String> contact) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
+  void _showUserDetails(BuildContext context, Map<String, dynamic> contact) {
+    _popupDialog = OverlayEntry(
       builder: (context) => GestureDetector(
         onTap: () {
-          Navigator.of(context).pop();
+          _popupDialog.remove();
         },
-        child: Container(
-          color: Colors.transparent,
-          child: GestureDetector(
-            onTap: () {},
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
+        child: Material(
+          color: Colors.black54,
+          child: Center(
+            child: GestureDetector(
+              onTap: () {}, // Prevents closing when tapping on the card itself
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
                 ),
-              ),
-              padding: EdgeInsets.all(16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(contact['imageUrl']!),
-                      radius: 24,
-                    ),
-                    title: Text(contact['name']!),
-                    subtitle: Text(contact['email']!),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(contact['imageUrl'] ?? 'https://via.placeholder.com/48'),
+                          radius: 24,
+                        ),
+                        title: Text('${contact['firstName']} ${contact['lastName']}'),
+                        subtitle: Text(contact['email']),
+                      ),
+                      SizedBox(height: 16),
+                      Text('ID: ${contact['id']}'),
+                      SizedBox(height: 8),
+                      Text('Phone: ${contact['phoneNo']}'),
+                      SizedBox(height: 8),
+                      Text('Province: ${contact['province'] ?? 'N/A'}'),
+                      SizedBox(height: 8),
+                      Text('District: ${contact['district'] ?? 'N/A'}'),
+                      SizedBox(height: 16),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            _popupDialog.remove();
+                          },
+                          child: Text('Close'),
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 16),
-                  Text('Status: ${contact['status']}'),
-                  SizedBox(height: 8),
-                  Text('Phone: ${contact['phone']}'),
-                  SizedBox(height: 8),
-                  Text('Province: ${contact['province']}'),
-                  SizedBox(height: 16),
-                ],
+                ),
               ),
             ),
           ),
         ),
       ),
     );
+
+    Overlay.of(context).insert(_popupDialog);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contacts'),
+        title: Text('Users'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -187,11 +148,11 @@ class _UsersPageState extends State<UsersPage> {
                   margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: NetworkImage(contact['imageUrl']!),
+                      backgroundImage: NetworkImage(contact['imageUrl'] ?? 'https://via.placeholder.com/48'),
                       radius: 24,
                     ),
-                    title: Text(contact['name']!),
-                    subtitle: Text(contact['email']!),
+                    title: Text('${contact['firstName']} ${contact['lastName']}'),
+                    subtitle: Text(contact['email']),
                     trailing: IconButton(
                       icon: Icon(Icons.more_vert),
                       onPressed: () {
@@ -212,8 +173,4 @@ class _UsersPageState extends State<UsersPage> {
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    home: UsersPage(),
-  ));
-}
+

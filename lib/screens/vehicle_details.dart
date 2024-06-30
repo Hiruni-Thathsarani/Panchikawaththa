@@ -25,7 +25,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
 
   Future<void> fetchData() async {
     try {
-      var url = 'http://10.0.2.2:8000/api/vehicle'; // Replace with your backend endpoint
+      var url = 'http://10.0.2.2:8000/vehicleDetails/vehicles'; // Replace with your backend endpoint
       var response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {

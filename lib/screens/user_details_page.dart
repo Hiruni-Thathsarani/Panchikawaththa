@@ -4,7 +4,7 @@ import 'package:my_app/screens/User.dart';
 class UserDetailsPage extends StatefulWidget {
   final User user;
 
-  const UserDetailsPage({super.key,  required this.user});
+  const UserDetailsPage({super.key, required this.user});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -95,12 +95,14 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
               ),
               TextField(
                 controller: businessContactController,
-                decoration: const InputDecoration(labelText: 'Business Contact No'),
+                decoration:
+                    const InputDecoration(labelText: 'Business Contact No'),
                 readOnly: !isEditable,
               ),
               TextField(
                 controller: businessDescriptionController,
-                decoration: const InputDecoration(labelText: 'Business Description'),
+                decoration:
+                    const InputDecoration(labelText: 'Business Description'),
                 readOnly: !isEditable,
               ),
               const SizedBox(height: 20),

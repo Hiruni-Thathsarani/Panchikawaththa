@@ -37,7 +37,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Future<void> fetchData() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/api/seller'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/sellerDetails/sellers/provinces'));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body)['provinces'];

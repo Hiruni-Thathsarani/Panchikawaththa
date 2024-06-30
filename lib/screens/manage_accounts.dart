@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/screens/User.dart'; // Ensure the User class is imported correctly
-import 'package:my_app/screens/user_details_page.dart'; // Import the UserDetailsPage file
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'User.dart'; // Import the User class
+import 'user_details_page.dart'; // Import the UserDetailsPage
 
 class ManageAccount extends StatefulWidget {
-  const ManageAccount({super.key});
+  const ManageAccount({Key? key}) : super(key: key);
 
   @override
   State<ManageAccount> createState() => _ManageAccountState();
@@ -11,68 +13,60 @@ class ManageAccount extends StatefulWidget {
 
 class _ManageAccountState extends State<ManageAccount> {
   List<User> users = []; // List of users
+  List<User> filteredUsers = []; // List of filtered users
   TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
-    // Fetch users data
-    fetchUsers();
     super.initState();
+    fetchUsers(); // Fetch users data
+    searchController.addListener(() {
+      filterUsers(searchController.text);
+    });
   }
 
-  void fetchUsers() {
-    // Dummy data for demonstration
-    users = [
-      User(
-          name: 'User 1',
-          email: 'user1@example.com',
-          activity: 'Active',
-          userType: UserType.buyer,
-          contact: '',
-          businessContact: '',
-          businessName: '',
-          businessDescription: ''),
-      User(
-          name: 'User 2',
-          email: 'user2@example.com',
-          activity: 'Active',
-          userType: UserType.buyer,
-          contact: '',
-          businessContact: '',
-          businessName: '',
-          businessDescription: ''),
-      User(
-          name: 'User 3',
-          email: 'user3@example.com',
-          activity: 'Active',
-          userType: UserType.buyer,
-          contact: '',
-          businessContact: '',
-          businessName: '',
-          businessDescription: ''),
-      // Add more users here
-    ];
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  Future<void> fetchUsers() async {
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/userDetails/users')); // Update the URL to match your backend
+
+    if (response.statusCode == 200) {
+      setState(() {
+        users = List<User>.from(json.decode(response.body).map((data) => User.fromJson(data)));
+        filteredUsers = List<User>.from(users); // Initialize filtered users with a copy of the full user list
+      });
+    } else {
+      // Handle the error
+      print('Failed to load users');
+    }
   }
 
   void filterUsers(String query) {
     setState(() {
       if (query.isEmpty) {
-        // If query is empty, show all users
-        fetchUsers(); // Reset to original user list
+        filteredUsers = List<User>.from(users); // Reset to original user list
       } else {
-        // Filter users based on query
-        users = users
-            .where(
-                (user) => user.name.toLowerCase().contains(query.toLowerCase()))
-            .toList();
+        filteredUsers = users.where((user) => user.name.toLowerCase().contains(query.toLowerCase())).toList();
       }
     });
   }
 
-  void deleteUser(User user) {
-    setState(() {
-      users.remove(user);
-    });
+  Future<void> deleteUser(User user) async {
+    final response = await http.delete(Uri.parse('http://10.0.2.2:8000/api/user/${user.id}')); // Use user ID in the URL
+
+    if (response.statusCode == 200) {
+      setState(() {
+        users.remove(user);
+        filteredUsers.remove(user); // Remove from filtered list as well
+      });
+    } else {
+      // Handle the error
+      print('Failed to delete user');
+    }
   }
 
   void showDeleteConfirmationDialog(User user) {
@@ -114,7 +108,6 @@ class _ManageAccountState extends State<ManageAccount> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: searchController,
-              onChanged: filterUsers,
               decoration: const InputDecoration(
                 labelText: 'Search Users',
                 border: OutlineInputBorder(),
@@ -123,13 +116,12 @@ class _ManageAccountState extends State<ManageAccount> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: users.length,
+              itemCount: filteredUsers.length,
               itemBuilder: (context, index) {
-                final user = users[index];
+                final user = filteredUsers[index];
                 return ListTile(
                   leading: CircleAvatar(
-                    backgroundImage: AssetImage(
-                        'assets/profile_${index + 1}.jpg'), // Replace with actual image path
+                    backgroundImage: AssetImage('assets/profile_${index + 1}.jpg'), // Replace with actual image path
                   ),
                   title: Text(user.name),
                   subtitle: Text(user.email),
@@ -159,3 +151,4 @@ class _ManageAccountState extends State<ManageAccount> {
     );
   }
 }
+

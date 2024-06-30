@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/screens/Category.dart';
 import 'package:my_app/screens/barchart.dart';
-import 'package:my_app/screens/buyer.dart';
 import 'package:my_app/screens/buyer2.dart';
 import 'package:my_app/screens/manage_accounts.dart';
 import 'package:my_app/screens/monthly_visits.dart';
@@ -32,7 +31,7 @@ class _AdminPageState extends State<AdminPage> {
 
   Future<Map<String, int>> fetchData() async {
     try {
-      var url = Uri.parse('http://10.0.2.2:8000/api/details');
+      var url = Uri.parse('http://10.0.2.2:8000/adminDetails/details');
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
@@ -177,7 +176,7 @@ class _AdminPageState extends State<AdminPage> {
                 icon: Icons.person,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return DashboardScreen();
+                    return  DashboardScreen();
                   }));
                 },
               ),
@@ -187,7 +186,7 @@ class _AdminPageState extends State<AdminPage> {
                 icon: Icons.shopping_cart,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return UsersPage();
+                    return  UsersPage();
                   }));
                 },
               ),
@@ -229,7 +228,7 @@ class _AdminPageState extends State<AdminPage> {
                 icon: Icons.car_rental,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return SparePartsApp();
+                    return  SparePartsApp();
                   }));
                 },
               ),
@@ -245,7 +244,8 @@ class _AdminPageState extends State<AdminPage> {
               ),
             ],
           ),
-          const SizedBox(height: 50),
+          const SizedBox(height: 50
+          ),
           Container(
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: 16),
