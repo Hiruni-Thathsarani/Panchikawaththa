@@ -11,7 +11,7 @@ import 'package:my_app/screens/search_page.dart';
 import 'package:my_app/screens/sellerLocation.dart';
 import 'package:my_app/screens/sparePartsDetails.dart';
 import 'package:my_app/screens/vehicle_details.dart';
-import 'package:my_app/screens/view_Analytics.dart'; // Update with your actual import paths
+import 'package:my_app/screens/view_Analytics.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({super.key});
@@ -176,7 +176,7 @@ class _AdminPageState extends State<AdminPage> {
                 icon: Icons.person,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return  DashboardScreen();
+                    return DashboardScreen();
                   }));
                 },
               ),
@@ -186,7 +186,7 @@ class _AdminPageState extends State<AdminPage> {
                 icon: Icons.shopping_cart,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return  UsersPage();
+                    return UsersPage();
                   }));
                 },
               ),
@@ -228,7 +228,7 @@ class _AdminPageState extends State<AdminPage> {
                 icon: Icons.car_rental,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return  SparePartsApp();
+                    return SparePartsApp();
                   }));
                 },
               ),
@@ -244,8 +244,7 @@ class _AdminPageState extends State<AdminPage> {
               ),
             ],
           ),
-          const SizedBox(height: 50
-          ),
+          const SizedBox(height: 50),
           Container(
             alignment: Alignment.centerLeft,
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -371,6 +370,20 @@ class _AdminPageState extends State<AdminPage> {
         openedCount: openedCount,
         engagedCount: engagedCount,
         eoiSentCount: eoiSentCount,
+      ),
+    );
+  }
+}
+
+class NewWidgetPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('New Widget Page'),
+      ),
+      body: Center(
+        child: Text('This is the new widget page.'),
       ),
     );
   }
