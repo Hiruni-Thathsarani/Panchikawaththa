@@ -21,8 +21,8 @@ class BarChartWidget extends StatelessWidget {
         height: 220,
         width: 270, // Adjust chart height as needed
         child: syncfusion_charts.SfCartesianChart(
-          primaryXAxis: const syncfusion_charts.CategoryAxis(),
-          primaryYAxis: const syncfusion_charts.NumericAxis(
+          primaryXAxis: syncfusion_charts.CategoryAxis(),
+          primaryYAxis: syncfusion_charts.NumericAxis(
             minimum: 0,
             maximum: 40,
             interval: 10,

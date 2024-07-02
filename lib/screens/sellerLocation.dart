@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/admin_page.dart';
+import 'package:my_app/screens/admin_page.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -37,7 +37,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   Future<void> fetchData() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/sellerDetails/sellers/provinces'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/admin/sellers-provinces'));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body)['provinces'];

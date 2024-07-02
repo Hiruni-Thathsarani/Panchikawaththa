@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:my_app/admin_page.dart';
+import 'package:my_app/screens/admin_page.dart';
 import 'package:my_app/screens/vehicle_details_2.dart';
 
 class VehicleDetails extends StatefulWidget {
@@ -25,7 +25,7 @@ class _VehicleDetailsState extends State<VehicleDetails> {
 
   Future<void> fetchData() async {
     try {
-      var url = 'http://10.0.2.2:8000/vehicleDetails/vehicles'; // Replace with your backend endpoint
+      var url = 'http://10.0.2.2:8000/admin/vehicle-handle'; // Replace with your backend endpoint
       var response = await http.get(Uri.parse(url));
 
       if (response.statusCode == 200) {

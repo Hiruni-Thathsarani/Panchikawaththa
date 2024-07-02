@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/admin_page.dart';
+import 'package:my_app/screens/admin_page.dart';
 
 class Sellers {
   final String username;

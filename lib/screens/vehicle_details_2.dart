@@ -28,7 +28,7 @@ class _VehicleListPageState extends State<VehicleListPage> {
 
     try {
       final response = await http.get(
-        Uri.parse('http://10.0.2.2:8000/vehicleDetails/vehicles/${widget.userId}'),
+        Uri.parse('http://10.0.2.2:8000/admin/user-vehicle/${widget.userId}'),
       );
 
       if (response.statusCode == 200) {

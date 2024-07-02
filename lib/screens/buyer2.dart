@@ -28,7 +28,7 @@ class _UsersPageState extends State<UsersPage> {
   }
 
   Future<void> fetchUsers() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/userDetails/users')); // Update the URL to match your backend
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/admin/user-details')); // Update the URL to match your backend
 
     if (response.statusCode == 200) {
       setState(() {

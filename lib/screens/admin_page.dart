@@ -1,14 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:my_app/screens/Category.dart';
-import 'package:my_app/screens/barchart.dart';
 import 'package:my_app/screens/buyer2.dart';
 import 'package:my_app/screens/manage_accounts.dart';
-import 'package:my_app/screens/monthly_visits.dart';
-import 'package:my_app/screens/piechart.dart';
-import 'package:my_app/screens/search_page.dart';
 import 'package:my_app/screens/sellerLocation.dart';
+import 'package:my_app/screens/services.dart';
 import 'package:my_app/screens/sparePartsDetails.dart';
 import 'package:my_app/screens/vehicle_details.dart';
 import 'package:my_app/screens/view_Analytics.dart';
@@ -31,7 +27,7 @@ class _AdminPageState extends State<AdminPage> {
 
   Future<Map<String, int>> fetchData() async {
     try {
-      var url = Uri.parse('http://10.0.2.2:8000/adminDetails/details');
+      var url = Uri.parse('http://10.0.2.2:8000/admin/details');
       var response = await http.get(url);
 
       if (response.statusCode == 200) {
@@ -54,53 +50,48 @@ class _AdminPageState extends State<AdminPage> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('My Profile'),
-        ),
-        body: FutureBuilder<Map<String, int>>(
-          future: _futureData,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text('Error: ${snapshot.error}'),
-              );
-            } else if (snapshot.hasData) {
-              var data = snapshot.data!;
-              return buildContent(data);
-            } else {
-              return const Center(
-                child: Text('No data available'),
-              );
-            }
-          },
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard, color: Color(0xFFFF5C01)),
-              label: 'Dashboard',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.delete, color: Color(0xFFFF5C01)),
-              label: 'Delete',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.add, color: Color(0xFFFF5C01)),
-              label: 'Add',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings, color: Color(0xFFFF5C01)),
-              label: 'Settings',
-            ),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(title: const Text('Admin Portal')),
+      body: FutureBuilder<Map<String, int>>(
+        future: _futureData,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else if (snapshot.hasData) {
+            var data = snapshot.data!;
+            return buildContent(data);
+          } else {
+            return const Center(
+              child: Text('No data available'),
+            );
+          }
+        },
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard, color: Color(0xFFFF5C01)),
+            label: 'Dashboard',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.delete, color: Color(0xFFFF5C01)),
+            label: 'Delete',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add, color: Color(0xFFFF5C01)),
+            label: 'Add',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings, color: Color(0xFFFF5C01)),
+            label: 'Settings',
+          ),
+        ],
       ),
     );
   }
@@ -141,7 +132,7 @@ class _AdminPageState extends State<AdminPage> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return const ViewAnalyticApp();
+                    return ViewAnalyticApp();
                   }));
                 },
                 style: ElevatedButton.styleFrom(
@@ -154,7 +145,7 @@ class _AdminPageState extends State<AdminPage> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return const ManageAccount();
+                    return ManageAccount();
                   }));
                 },
                 style: ElevatedButton.styleFrom(
@@ -202,7 +193,7 @@ class _AdminPageState extends State<AdminPage> {
                 icon: Icons.library_books,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return const search_page();
+                    return  SparePartsApp();
                   }));
                 },
               ),
@@ -238,53 +229,13 @@ class _AdminPageState extends State<AdminPage> {
                 icon: Icons.add_business,
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return const Category();
+                    return Services();
                   }));
                 },
               ),
             ],
           ),
           const SizedBox(height: 50),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: const Text(
-              'Statistics',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFFFF5C01),
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          PreferredSize(
-            preferredSize: const Size.fromHeight(50),
-            child: Container(
-              color: Colors.grey[200],
-              child: const TabBar(
-                tabs: [
-                  Tab(text: 'Overview'),
-                  Tab(text: 'Popular Ads'),
-                  Tab(text: 'Monthly Visits'),
-                ],
-                labelColor: Colors.black,
-                indicatorColor: Color(0xFFFF5C01),
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          SizedBox(
-            height: 350,
-            child: TabBarView(
-              children: [
-                BarChartWidget(), // Replace with your chart widgets
-                PieChartWidget(),
-                _buildMonthlyVisitsContent(),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
         ],
       ),
     );
@@ -356,35 +307,6 @@ class _AdminPageState extends State<AdminPage> {
           ),
         );
       },
-    );
-  }
-
-  Widget _buildMonthlyVisitsContent() {
-    // Example counts, replace with your actual data or defaults
-    int openedCount = 75;
-    int engagedCount = 60;
-    int eoiSentCount = 45;
-
-    return Center(
-      child: MonthlyVisitsWidget(
-        openedCount: openedCount,
-        engagedCount: engagedCount,
-        eoiSentCount: eoiSentCount,
-      ),
-    );
-  }
-}
-
-class NewWidgetPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('New Widget Page'),
-      ),
-      body: Center(
-        child: Text('This is the new widget page.'),
-      ),
     );
   }
 }

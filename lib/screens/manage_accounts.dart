@@ -32,7 +32,7 @@ class _ManageAccountState extends State<ManageAccount> {
   }
 
   Future<void> fetchUsers() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:8000/userDetails/users')); // Update the URL to match your backend
+    final response = await http.get(Uri.parse('http://10.0.2.2:8000/admin/user-details')); // Update the URL to match your backend
 
     if (response.statusCode == 200) {
       setState(() {
@@ -56,7 +56,7 @@ class _ManageAccountState extends State<ManageAccount> {
   }
 
   Future<void> deleteUser(User user) async {
-    final response = await http.delete(Uri.parse('http://10.0.2.2:8000/api/user/${user.id}')); // Use user ID in the URL
+    final response = await http.delete(Uri.parse('http://10.0.2.2:8000/admin/user-delete/${user.id}')); // Use user ID in the URL
 
     if (response.statusCode == 200) {
       setState(() {
