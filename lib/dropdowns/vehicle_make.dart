@@ -38,7 +38,7 @@ class _VehicleMakeState extends State<VehicleMake> {
           borderSide: const BorderSide(color: Color(0xFFFF5c01), width: 1.0),
           borderRadius: BorderRadius.circular(10.0),
         ),
-      ),
+      ), 
       items: widget.makes.map((make) {
         return DropdownMenuItem<String>(
           value: make,
