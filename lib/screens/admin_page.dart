@@ -132,7 +132,7 @@ class _AdminPageState extends State<AdminPage> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                    return ViewAnalyticApp();
+                    return const ViewAnalyticApp();
                   }));
                 },
                 style: ElevatedButton.styleFrom(

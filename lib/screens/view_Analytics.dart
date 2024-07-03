@@ -12,8 +12,8 @@ class ViewAnalyticApp extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('View Analytics'),
-          bottom: TabBar(
+          title: const Text('View Analytics'),
+          bottom: const TabBar(
             tabs: [
               Tab(text: 'Overview'),
               Tab(text: 'Popular Ads'),
@@ -27,7 +27,7 @@ class ViewAnalyticApp extends StatelessWidget {
           children: [
             BarChartWidget(),
             PieChartWidget(),
-            MonthlyVisitsContent(),
+            const MonthlyVisitsContent(),
           ],
         ),
       ),
